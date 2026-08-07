@@ -4,20 +4,20 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Shop - The Lazy Llama Coffee Bar</title>
+
   <!-- Bootstrap 5 -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <!-- Font Awesome 6 (free) -->
+  <!-- Font Awesome 6 -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <style>
     /* ========================================
-       COMPLETE CSS – THE LAZY LLAMA COFFEE BAR (Shop)
-       ======================================== */
-
-    /* ===== 1. ROOT VARIABLES ===== */
+       ROOT VARIABLES
+    ======================================== */
     :root {
       --brown: #5D4037;
       --beige: #D7CCC8;
@@ -42,9 +42,16 @@
       --shadow-md: 0 20px 50px rgba(62,39,35,0.12);
       --shadow-lg: 0 35px 80px rgba(62,39,35,0.16);
       --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 64px;
     }
 
-    /* ===== 2. RESET & BASE ===== */
+    /* ========================================
+       RESET & BASE
+    ======================================== */
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       background: var(--white);
@@ -62,7 +69,9 @@
     ::selection { background: var(--coral); color: var(--white-pure); }
     :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
 
-    /* ===== 3. BOOTSTRAP OVERRIDES ===== */
+    /* ========================================
+       BOOTSTRAP OVERRIDES
+    ======================================== */
     .btn {
       font-family: var(--font-sans);
       font-weight: 600;
@@ -117,7 +126,9 @@
     .form-range::-webkit-slider-thumb { background: var(--brown); }
     .form-range::-moz-range-thumb { background: var(--brown); }
 
-    /* ===== 4. SECTION BADGE ===== */
+    /* ========================================
+       SECTION BADGE
+    ======================================== */
     .section-badge {
       display: inline-block;
       font-size: 0.75rem;
@@ -150,7 +161,9 @@
       font-weight: 300;
     }
 
-    /* ===== 5. NAVBAR ===== */
+    /* ========================================
+       NAVBAR
+    ======================================== */
     .navbar {
       background: rgba(245,245,245,0.85);
       backdrop-filter: blur(18px);
@@ -227,7 +240,9 @@
       margin-left: 10px;
     }
 
-    /* ===== 6. PAGE HERO ===== */
+    /* ========================================
+       PAGE HERO
+    ======================================== */
     .page-hero {
       padding: 4rem 0;
       background: var(--beige-light);
@@ -257,7 +272,9 @@
       pointer-events: none;
     }
 
-    /* ===== 7. FILTER SIDEBAR (3D) ===== */
+    /* ========================================
+       FILTER SIDEBAR
+    ======================================== */
     .filter-sidebar {
       padding: 1.5rem;
       background: #fff;
@@ -315,7 +332,9 @@
       margin-top: 0.5rem;
     }
 
-    /* ===== 8. PRODUCT CARDS (3D) ===== */
+    /* ========================================
+       PRODUCT CARDS
+    ======================================== */
     .product-card {
       background: #fff;
       border-radius: var(--radius-md);
@@ -392,6 +411,12 @@
       font-family: var(--font-serif);
       margin-bottom: 0.25rem;
     }
+    .product-card .product-description {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-bottom: 0.5rem;
+      line-height: 1.4;
+    }
     .product-rating {
       display: flex;
       align-items: center;
@@ -417,8 +442,26 @@
       padding: 0.3rem 0.6rem;
       min-height: 32px;
     }
+    .product-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.3rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-tags .tag {
+      font-size: 0.6rem;
+      padding: 0.15rem 0.6rem;
+      border-radius: var(--radius-pill);
+      background: var(--beige-light);
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 500;
+    }
 
-    /* ===== 9. PAGINATION (3D) ===== */
+    /* ========================================
+       PAGINATION
+    ======================================== */
     .pagination {
       gap: 0.3rem;
     }
@@ -456,7 +499,9 @@
       padding: 0 1.2rem;
     }
 
-    /* ===== 10. FOOTER ===== */
+    /* ========================================
+       FOOTER
+    ======================================== */
     .footer {
       background: var(--brown-dark);
       color: rgba(255,255,255,0.8);
@@ -474,13 +519,184 @@
       opacity: 0.6;
     }
 
-    /* ===== 11. ANIMATIONS ===== */
+    /* ========================================
+       ANIMATIONS
+    ======================================== */
     @keyframes fadeInUp {
       from { opacity: 0; transform: translateY(30px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    /* ===== 12. RESPONSIVE ===== */
+    /* ========================================
+       SEARCH STYLES (overlay + shop bar)
+    ======================================== */
+    .search-toggle {
+      cursor: pointer;
+      transition: color 0.3s ease;
+      padding: 0.4rem;
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+    .search-toggle:hover { color: var(--brown); }
+
+    .search-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 9999;
+      display: none;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 15vh;
+      animation: searchFadeIn 0.3s ease;
+    }
+    .search-overlay.active { display: flex; }
+    @keyframes searchFadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes searchSlideDown {
+      from { opacity:0; transform: translateY(-30px) scale(0.98); }
+      to { opacity:1; transform: translateY(0) scale(1); }
+    }
+    .search-overlay .search-container {
+      width: 90%;
+      max-width: 700px;
+      background: var(--white-pure);
+      border-radius: var(--radius-lg, 28px);
+      padding: var(--space-lg, 40px);
+      box-shadow: 0 40px 80px rgba(0,0,0,0.25);
+      position: relative;
+      animation: searchSlideDown 0.4s cubic-bezier(0.22,0.61,0.36,1);
+    }
+    .search-overlay .search-close {
+      position: absolute;
+      top: var(--space-sm, 16px);
+      right: var(--space-sm, 16px);
+      font-size: 1.5rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: color 0.3s ease, transform 0.3s;
+      background: none;
+      border: none;
+      padding: 0.5rem;
+      line-height: 1;
+    }
+    .search-overlay .search-close:hover { color: var(--brown); transform: rotate(90deg); }
+    .search-overlay .search-input-wrapper {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm, 16px);
+      border-bottom: 2px solid var(--border);
+      padding-bottom: var(--space-sm, 16px);
+      margin-bottom: var(--space-md, 24px);
+    }
+    .search-overlay .search-input-wrapper i {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+    }
+    .search-overlay .search-input-wrapper input {
+      flex: 1;
+      border: none;
+      outline: none;
+      font-size: 1.1rem;
+      padding: 0.5rem 0;
+      background: transparent;
+      font-family: var(--font-sans, 'DM Sans', sans-serif);
+      color: var(--text);
+    }
+    .search-overlay .search-input-wrapper input::placeholder {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+    .search-results {
+      max-height: 400px;
+      overflow-y: auto;
+      display: none;
+    }
+    .search-results.has-results { display: block; }
+    .search-results .result-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md, 24px);
+      padding: var(--space-sm, 16px) var(--space-xs, 8px);
+      border-radius: var(--radius-sm, 8px);
+      cursor: pointer;
+      transition: background 0.2s ease;
+      text-decoration: none;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+    }
+    .search-results .result-item:last-child { border-bottom: none; }
+    .search-results .result-item:hover { background: var(--beige-light, #E9E2DE); }
+    .search-results .result-item .result-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: var(--radius-sm, 8px);
+      background: var(--beige, #D7CCC8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.3rem;
+      color: var(--brown-light);
+      flex-shrink: 0;
+    }
+    .search-results .result-item .result-info {
+      flex: 1;
+    }
+    .search-results .result-item .result-info h4 {
+      font-size: 0.95rem;
+      font-weight: 600;
+      margin-bottom: 0;
+      font-family: var(--font-sans, 'DM Sans', sans-serif);
+    }
+    .search-results .result-item .result-info p {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0;
+    }
+    .search-results .result-item .result-price {
+      font-weight: 600;
+      color: var(--brown);
+      font-size: 0.95rem;
+    }
+    .search-results .no-results {
+      text-align: center;
+      padding: var(--space-lg, 40px) 0;
+      color: var(--text-muted);
+    }
+    .search-results .no-results p { margin-bottom: 0.3rem; }
+    .search-results .no-results strong { color: var(--brown); }
+
+    .shop-search-wrapper {
+      margin-bottom: var(--space-lg, 40px);
+    }
+    .shop-search-wrapper .shop-search-input {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      border: 2px solid var(--border);
+      border-radius: var(--radius-pill, 999px);
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      font-family: var(--font-sans, 'DM Sans', sans-serif);
+      background: var(--white-pure);
+      color: var(--text);
+    }
+    .shop-search-wrapper .shop-search-input:focus {
+      outline: none;
+      border-color: var(--brown);
+      box-shadow: 0 0 0 4px rgba(93,64,55,0.08);
+    }
+    .shop-search-wrapper .shop-search-input::placeholder {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ========================================
+       RESPONSIVE
+    ======================================== */
     @media (max-width: 992px) {
       .filter-sidebar {
         position: static;
@@ -493,368 +709,533 @@
       .filter-sidebar:hover { transform: translateY(-2px) rotateX(0) rotateY(0); }
       .product-card:hover { transform: translateY(-6px) rotateX(0) rotateY(0); }
       .footer .row { text-align: center; }
+      .search-overlay { padding-top: 10vh; }
+      .search-overlay .search-container { padding: var(--space-md, 24px); width: 95%; }
+      .search-overlay .search-input-wrapper input { font-size: 1rem; }
+      .search-results .result-item { gap: var(--space-sm, 16px); padding: var(--space-xs, 8px); }
+      .search-results .result-item .result-icon { width: 36px; height: 36px; font-size: 1rem; }
+      .search-results .result-item .result-info h4 { font-size: 0.85rem; }
     }
     @media (max-width: 576px) {
       .filter-sidebar { padding: 1rem; }
       .product-image .coffee-icon { font-size: 2.8rem; }
       .pagination .page-item .page-link { width: 36px; height: 36px; font-size: 0.85rem; }
+      .search-overlay { padding-top: 5vh; }
+      .search-overlay .search-container { padding: var(--space-sm, 16px); }
     }
   </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<nav class="navbar navbar-expand-lg sticky-top">
-  <div class="container">
-    <a class="navbar-brand" href="index.html">
-      <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
-    </a>
-    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navLinks">
-      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
-        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
-        <li class="nav-item"><a class="nav-link" href="our-coffee.html">Our Coffee</a></li>
-        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
-        <li class="nav-item"><a class="nav-link" href="locations.html">Locations</a></li>
-        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
-      </ul>
-      <div class="d-flex align-items-center gap-2">
-        <a href="#" class="text-muted"><i class="fas fa-search"></i></a>
-        <a href="account.html" class="text-muted"><i class="fas fa-user"></i></a>
-        <a href="wishlist.html" class="text-muted position-relative">
-          <i class="fas fa-heart"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">0</span>
-        </a>
-        <a href="cart.html" class="text-muted position-relative">
-          <i class="fas fa-shopping-bag"></i>
-          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">0</span>
-        </a>
-        <a href="checkout.html" class="btn btn-primary btn-sm">Order Coffee</a>
-      </div>
-    </div>
-  </div>
-</nav>
-
-<!-- ===== PAGE HERO ===== -->
-<section class="page-hero">
-  <div class="container">
-    <h1>Our Coffee Collection</h1>
-    <p>Discover premium specialty coffees from the world's best growing regions</p>
-    <div class="hero-llama"><i class="fas fa-otter"></i></div>
-  </div>
-</section>
-
-<!-- ===== SHOP CONTENT ===== -->
-<section class="py-5">
-  <div class="container">
-    <div class="row g-4">
-
-      <!-- Filters Sidebar -->
-      <div class="col-lg-3">
-        <div class="filter-sidebar">
-          <h5><i class="fas fa-sliders-h text-coral me-2"></i>Categories</h5>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox" checked>
-            <label class="form-check-label">All</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Blends</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Single Origin</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Espresso</label>
-          </div>
-
-          <hr>
-
-          <h5><i class="fas fa-dollar-sign text-coral me-2"></i>Price Range</h5>
-          <input type="range" class="form-range" min="0" max="100" value="50">
-          <div class="price-labels">
-            <span>$0</span>
-            <span>$50</span>
-          </div>
-
-          <hr>
-
-          <h5><i class="fas fa-fire text-coral me-2"></i>Roast Level</h5>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Light</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Medium</label>
-          </div>
-          <div class="form-check">
-            <input class="form-check-input" type="checkbox">
-            <label class="form-check-label">Dark</label>
-          </div>
-
-          <button class="btn btn-primary mt-3"><i class="fas fa-filter me-2"></i>Apply Filters</button>
-          <button class="btn btn-outline-secondary"><i class="fas fa-undo me-2"></i>Clear All</button>
+  <!-- ===== NAVBAR ===== -->
+  <nav class="navbar navbar-expand-lg sticky-top">
+    <div class="container">
+      <a class="navbar-brand" href="index.html">
+        <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
+      </a>
+      <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navLinks">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+          <li class="nav-item"><a class="nav-link" href="our-coffee.html">Our Coffee</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="locations.html">Locations</a></li>
+          <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        </ul>
+        <div class="d-flex align-items-center gap-2">
+          <span class="search-toggle" id="searchToggle" aria-label="Search">
+            <i class="fas fa-search"></i>
+          </span>
+          <a href="account.html" class="text-muted"><i class="fas fa-user"></i></a>
+          <a href="wishlist.html" class="text-muted position-relative">
+            <i class="fas fa-heart"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;" id="wishlistCount">0</span>
+          </a>
+          <a href="cart.html" class="text-muted position-relative">
+            <i class="fas fa-shopping-bag"></i>
+            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;" id="cartCount">0</span>
+          </a>
+          <a href="checkout.html" class="btn btn-primary btn-sm">Order Coffee</a>
         </div>
       </div>
+    </div>
+  </nav>
 
-      <!-- Products Grid -->
-      <div class="col-lg-9">
-        <!-- Toolbar -->
-        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
-          <span class="text-muted"><i class="fas fa-cubes me-2"></i>Showing <strong>6</strong> products</span>
-          <div class="d-flex align-items-center gap-2">
-            <label class="text-muted small me-1">Sort by:</label>
-            <select class="form-select form-select-sm w-auto" style="border-radius: var(--radius-pill); border-color: var(--border);">
-              <option>Newest</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Popular</option>
-            </select>
+  <!-- ===== SEARCH OVERLAY ===== -->
+  <div class="search-overlay" id="searchOverlay">
+    <div class="search-container">
+      <button class="search-close" id="searchClose"><i class="fas fa-times"></i></button>
+      <div class="search-input-wrapper">
+        <i class="fas fa-search"></i>
+        <input type="text" id="globalSearchInput" placeholder="Search for coffee, blends, origins..." autofocus />
+      </div>
+      <div class="search-results" id="globalSearchResults"></div>
+    </div>
+  </div>
+
+  <!-- ===== PAGE HERO ===== -->
+  <section class="page-hero">
+    <div class="container">
+      <h1>Our Coffee Collection</h1>
+      <p>Explore our carefully curated selection of specialty coffees from the world's finest growing regions.</p>
+      <div class="hero-llama"><i class="fas fa-otter"></i></div>
+    </div>
+  </section>
+
+  <!-- ===== SHOP CONTENT ===== -->
+  <section class="py-5">
+    <div class="container">
+      <div class="row g-4">
+
+        <!-- Filters Sidebar -->
+        <div class="col-lg-3">
+          <div class="filter-sidebar">
+            <h5><i class="fas fa-sliders-h text-coral me-2"></i>Categories</h5>
+            <div class="form-check">
+              <input class="form-check-input filter-category" type="checkbox" value="all" checked>
+              <label class="form-check-label">All</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input filter-category" type="checkbox" value="blend">
+              <label class="form-check-label">Blends</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input filter-category" type="checkbox" value="single-origin">
+              <label class="form-check-label">Single Origin</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input filter-category" type="checkbox" value="espresso">
+              <label class="form-check-label">Espresso</label>
+            </div>
+
+            <hr>
+
+            <h5><i class="fas fa-dollar-sign text-coral me-2"></i>Price Range</h5>
+            <input type="range" class="form-range" id="priceRange" min="0" max="50" value="50" step="1">
+            <div class="price-labels">
+              <span>$0</span>
+              <span id="priceDisplay">$50</span>
+            </div>
+
+            <hr>
+
+            <h5><i class="fas fa-fire text-coral me-2"></i>Roast Level</h5>
+            <div class="form-check">
+              <input class="form-check-input filter-roast" type="checkbox" value="light">
+              <label class="form-check-label">Light</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input filter-roast" type="checkbox" value="medium">
+              <label class="form-check-label">Medium</label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input filter-roast" type="checkbox" value="dark">
+              <label class="form-check-label">Dark</label>
+            </div>
+
+            <button class="btn btn-primary mt-3" id="applyFilters"><i class="fas fa-filter me-2"></i>Apply Filters</button>
+            <button class="btn btn-outline-secondary" id="clearFilters"><i class="fas fa-undo me-2"></i>Clear All</button>
           </div>
         </div>
 
         <!-- Products Grid -->
-        <div class="row g-4">
+        <div class="col-lg-9">
+          <!-- Search bar -->
+          <div class="shop-search-wrapper">
+            <input type="text" class="shop-search-input" id="shopSearchInput" placeholder="Search for coffee, blends, origins..." />
+          </div>
 
-          <!-- Product 1 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-mug-hot coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Blend</span>
-                <h3>Lazy Llama House Blend</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="count">(24)</span>
-                </div>
-                <div class="product-price">$18.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
+          <!-- Toolbar -->
+          <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+            <span class="text-muted"><i class="fas fa-cubes me-2"></i>Showing <strong id="resultsCount">0</strong> products</span>
+            <div class="d-flex align-items-center gap-2">
+              <label class="text-muted small me-1">Sort by:</label>
+              <select class="form-select form-select-sm w-auto" id="sortSelect" style="border-radius: var(--radius-pill); border-color: var(--border);">
+                <option value="default">Newest</option>
+                <option value="price-low">Price: Low to High</option>
+                <option value="price-high">Price: High to Low</option>
+                <option value="popular">Popular</option>
+              </select>
             </div>
           </div>
 
-          <!-- Product 2 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-mug-saucer coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Single Origin</span>
-                <h3>Alaçatı Espresso</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="count">(18)</span>
-                </div>
-                <div class="product-price">$22.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
-            </div>
+          <!-- Product Grid -->
+          <div class="row g-4" id="productGrid">
+            <!-- Products injected by JavaScript -->
           </div>
 
-          <!-- Product 3 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-coffee coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Single Origin</span>
-                <h3>New York Roast</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="count">(31)</span>
-                </div>
-                <div class="product-price">$19.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Product 4 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-mug-hot coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Blend</span>
-                <h3>Llama Latte Blend</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="count">(15)</span>
-                </div>
-                <div class="product-price">$16.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Product 5 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-mug-saucer coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Single Origin</span>
-                <h3>Ethiopian Sunrise</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★★</span>
-                  <span class="count">(27)</span>
-                </div>
-                <div class="product-price">$24.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Product 6 -->
-          <div class="col-md-6 col-lg-4">
-            <div class="product-card">
-              <div class="product-image">
-                <i class="fas fa-coffee coffee-icon"></i>
-                <button class="product-wishlist"><i class="far fa-heart"></i></button>
-              </div>
-              <div class="p-3">
-                <span class="product-category">Single Origin</span>
-                <h3>Colombian Reserve</h3>
-                <div class="product-rating">
-                  <span class="stars">★★★★☆</span>
-                  <span class="count">(19)</span>
-                </div>
-                <div class="product-price">$21.99</div>
-                <div class="d-flex gap-2">
-                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
-                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
+          <!-- Pagination -->
+          <nav aria-label="Page navigation" class="mt-4">
+            <ul class="pagination justify-content-center">
+              <li class="page-item active"><a class="page-link" href="#">1</a></li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">Next <i class="fas fa-arrow-right ms-1"></i></a></li>
+            </ul>
+          </nav>
         </div>
 
-        <!-- Pagination -->
-        <nav aria-label="Page navigation" class="mt-4">
-          <ul class="pagination justify-content-center">
-            <li class="page-item active"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next <i class="fas fa-arrow-right ms-1"></i></a></li>
-          </ul>
-        </nav>
       </div>
-
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-  <div class="container">
-    <div class="row g-4">
-      <div class="col-md-6 col-lg-3">
-        <h3>The Lazy Llama<br>Coffee Bar</h3>
-        <p class="opacity-75">Good Coffee. Lazy Moments.</p>
-        <div class="d-flex gap-3">
-          <a href="#" aria-label="Instagram"><i class="fab fa-instagram fs-4"></i></a>
-          <a href="#" aria-label="Facebook"><i class="fab fa-facebook fs-4"></i></a>
-          <a href="#" aria-label="Twitter"><i class="fab fa-twitter fs-4"></i></a>
+  <!-- ===== FOOTER ===== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <h3>The Lazy Llama<br>Coffee Bar</h3>
+          <p class="opacity-75">Good Coffee. Lazy Moments.</p>
+          <div class="d-flex gap-3">
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram fs-4"></i></a>
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook fs-4"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter fs-4"></i></a>
+          </div>
         </div>
+        <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Shop</h4><ul><li><a href="shop.html">All Coffees</a></li><li><a href="shop.html">Blends</a></li><li><a href="shop.html">Single Origin</a></li></ul></div>
+        <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Company</h4><ul><li><a href="about.html">About</a></li><li><a href="our-coffee.html">Our Coffee</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+        <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Locations</h4><ul><li><a href="locations.html">New York</a></li><li><a href="locations.html">Alaçatı</a></li></ul></div>
       </div>
-      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Shop</h4><ul><li><a href="shop.html">All Coffees</a></li><li><a href="shop.html">Blends</a></li><li><a href="shop.html">Single Origin</a></li></ul></div>
-      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Company</h4><ul><li><a href="about.html">About</a></li><li><a href="our-coffee.html">Our Coffee</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
-      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Locations</h4><ul><li><a href="locations.html">New York</a></li><li><a href="locations.html">Alaçatı</a></li></ul></div>
+      <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between mt-4">
+        <span>&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</span>
+        <span>Follow us: @thelazyllamacoffeebar</span>
+      </div>
     </div>
-    <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between mt-4">
-      <span>&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</span>
-      <span>Follow us: @thelazyllamacoffeebar</span>
-    </div>
-  </div>
-</footer>
+  </footer>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Shop interactivity -->
-<script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Wishlist toggle
-    document.querySelectorAll('.product-wishlist').forEach(btn => {
-      btn.addEventListener('click', function(e) {
-        e.stopPropagation();
-        this.classList.toggle('active');
-        const icon = this.querySelector('i');
-        if (this.classList.contains('active')) {
-          icon.className = 'fas fa-heart';
-        } else {
-          icon.className = 'far fa-heart';
+  <!-- ===== SHOP LOGIC ===== -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+
+      // ===== REALISTIC PRODUCT DATA =====
+      const products = [
+        {
+          id: 1,
+          name: 'Lazy Llama House Blend',
+          category: 'blend',
+          price: 18.99,
+          roast: 'medium',
+          icon: 'fa-mug-hot',
+          rating: 4,
+          reviews: 24,
+          description: 'Our signature blend – a harmonious combination of Brazilian and Colombian beans with notes of dark chocolate, caramel, and a hint of citrus.',
+          origin: 'Brazil & Colombia',
+          tags: ['Chocolate', 'Caramel', 'Citrus']
+        },
+        {
+          id: 2,
+          name: 'Alaçatı Espresso',
+          category: 'single-origin',
+          price: 22.99,
+          roast: 'dark',
+          icon: 'fa-mug-saucer',
+          rating: 5,
+          reviews: 18,
+          description: 'A bold, full-bodied espresso from the Aegean region of Turkey. Rich crema with intense notes of dark chocolate and dried fruit.',
+          origin: 'Alaçatı, Turkey',
+          tags: ['Bold', 'Chocolate', 'Dried Fruit']
+        },
+        {
+          id: 3,
+          name: 'New York Roast',
+          category: 'single-origin',
+          price: 19.99,
+          roast: 'medium',
+          icon: 'fa-coffee',
+          rating: 4,
+          reviews: 31,
+          description: 'A classic East Coast roast – bold, smooth, and balanced. Notes of toasted nuts, brown sugar, and a clean, bright finish.',
+          origin: 'Brazil',
+          tags: ['Nutty', 'Brown Sugar', 'Bright']
+        },
+        {
+          id: 4,
+          name: 'Ethiopian Yirgacheffe',
+          category: 'single-origin',
+          price: 24.99,
+          roast: 'light',
+          icon: 'fa-mug-hot',
+          rating: 5,
+          reviews: 42,
+          description: 'From the birthplace of coffee – a delicate, complex cup with floral aromatics, blueberry notes, and a silky, tea-like body.',
+          origin: 'Yirgacheffe, Ethiopia',
+          tags: ['Floral', 'Blueberry', 'Tea-like']
+        },
+        {
+          id: 5,
+          name: 'Colombian Supremo',
+          category: 'single-origin',
+          price: 21.99,
+          roast: 'medium',
+          icon: 'fa-mug-saucer',
+          rating: 4,
+          reviews: 27,
+          description: 'Well-balanced with a smooth, rich body. Flavours of milk chocolate, toasted almond, and a subtle hint of orange zest.',
+          origin: 'Colombia',
+          tags: ['Chocolate', 'Almond', 'Citrus']
+        },
+        {
+          id: 6,
+          name: 'Dark Roast Espresso',
+          category: 'espresso',
+          price: 20.99,
+          roast: 'dark',
+          icon: 'fa-coffee',
+          rating: 4,
+          reviews: 22,
+          description: 'An intense, smoky espresso blend designed for the perfect crema. Deep flavours of dark cocoa, roasted hazelnut, and a lingering finish.',
+          origin: 'Brazil & Guatemala',
+          tags: ['Smoky', 'Cocoa', 'Hazelnut']
+        },
+        {
+          id: 7,
+          name: 'Morning Blend',
+          category: 'blend',
+          price: 17.99,
+          roast: 'light',
+          icon: 'fa-mug-hot',
+          rating: 3,
+          reviews: 12,
+          description: 'A bright, uplifting blend that shines in the morning. Notes of stone fruit, honey, and a crisp, clean finish.',
+          origin: 'Colombia & Ethiopia',
+          tags: ['Fruity', 'Honey', 'Crisp']
+        },
+        {
+          id: 8,
+          name: 'Decaf Swiss Water',
+          category: 'single-origin',
+          price: 23.99,
+          roast: 'medium',
+          icon: 'fa-coffee',
+          rating: 4,
+          reviews: 16,
+          description: 'Decaffeinated using the Swiss Water process – 99.9% caffeine-free without compromising flavour. Rich, smooth, with notes of caramel and toasted nuts.',
+          origin: 'Colombia',
+          tags: ['Decaf', 'Caramel', 'Nutty']
+        }
+      ];
+
+      // ===== DOM REFS =====
+      const productGrid = document.getElementById('productGrid');
+      const resultsCount = document.getElementById('resultsCount');
+      const shopSearchInput = document.getElementById('shopSearchInput');
+      const sortSelect = document.getElementById('sortSelect');
+      const priceRange = document.getElementById('priceRange');
+      const priceDisplay = document.getElementById('priceDisplay');
+      const applyFiltersBtn = document.getElementById('applyFilters');
+      const clearFiltersBtn = document.getElementById('clearFilters');
+      const filterCategories = document.querySelectorAll('.filter-category');
+      const filterRoasts = document.querySelectorAll('.filter-roast');
+
+      const searchToggle = document.getElementById('searchToggle');
+      const searchOverlay = document.getElementById('searchOverlay');
+      const searchClose = document.getElementById('searchClose');
+      const globalSearchInput = document.getElementById('globalSearchInput');
+      const globalSearchResults = document.getElementById('globalSearchResults');
+
+      // ===== RENDER PRODUCTS =====
+      function renderProducts(productArray) {
+        if (!productArray.length) {
+          productGrid.innerHTML = `
+            <div class="col-12 text-center py-5">
+              <i class="fas fa-search" style="font-size:3rem; color:var(--text-muted);"></i>
+              <h4 class="mt-3">No products found</h4>
+              <p class="text-muted">Try adjusting your search or filters</p>
+            </div>
+          `;
+          resultsCount.textContent = '0';
+          return;
+        }
+
+        productGrid.innerHTML = productArray.map(p => `
+          <div class="col-md-6 col-lg-4" data-product-id="${p.id}">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas ${p.icon} coffee-icon"></i>
+                <button class="product-wishlist" data-id="${p.id}"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">${p.category}</span>
+                <h3>${p.name}</h3>
+                <div class="product-rating">
+                  <span class="stars">${'★'.repeat(p.rating)}${'☆'.repeat(5 - p.rating)}</span>
+                  <span class="count">(${p.reviews})</span>
+                </div>
+                <div class="product-description">${p.description}</div>
+                <div class="product-tags">
+                  ${p.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}
+                </div>
+                <div class="product-price">$${p.price.toFixed(2)}</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html?id=${p.id}" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill add-to-cart" data-id="${p.id}">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        `).join('');
+
+        resultsCount.textContent = productArray.length;
+
+        // Wishlist toggle
+        document.querySelectorAll('.product-wishlist').forEach(btn => {
+          btn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            this.classList.toggle('active');
+            const icon = this.querySelector('i');
+            icon.className = this.classList.contains('active') ? 'fas fa-heart' : 'far fa-heart';
+          });
+        });
+
+        // Add to cart
+        document.querySelectorAll('.add-to-cart').forEach(btn => {
+          btn.addEventListener('click', function() {
+            const productId = parseInt(this.dataset.id);
+            const product = products.find(p => p.id === productId);
+            if (product) {
+              alert(`Added "${product.name}" to your cart!`);
+              const cartBadge = document.getElementById('cartCount');
+              cartBadge.textContent = parseInt(cartBadge.textContent) + 1;
+            }
+          });
+        });
+      }
+
+      // ===== FILTER, SEARCH, SORT =====
+      function filterAndSort() {
+        const searchTerm = shopSearchInput.value.toLowerCase().trim();
+        const selectedCategories = Array.from(filterCategories).filter(cb => cb.checked).map(cb => cb.value);
+        const selectedRoasts = Array.from(filterRoasts).filter(cb => cb.checked).map(cb => cb.value);
+        const maxPrice = parseFloat(priceRange.value) || 50;
+        const sortValue = sortSelect.value;
+
+        let filtered = products.filter(p => {
+          const matchesSearch = p.name.toLowerCase().includes(searchTerm) ||
+                                p.category.toLowerCase().includes(searchTerm) ||
+                                p.origin.toLowerCase().includes(searchTerm);
+          if (!matchesSearch) return false;
+
+          const categoryMatch = selectedCategories.includes('all') || selectedCategories.includes(p.category);
+          if (!categoryMatch) return false;
+
+          if (selectedRoasts.length && !selectedRoasts.includes(p.roast)) return false;
+
+          if (p.price > maxPrice) return false;
+
+          return true;
+        });
+
+        switch (sortValue) {
+          case 'price-low': filtered.sort((a,b) => a.price - b.price); break;
+          case 'price-high': filtered.sort((a,b) => b.price - a.price); break;
+          case 'popular': filtered.sort((a,b) => b.reviews - a.reviews); break;
+          default: break;
+        }
+
+        renderProducts(filtered);
+      }
+
+      // ===== EVENT BINDINGS =====
+      shopSearchInput.addEventListener('input', filterAndSort);
+      sortSelect.addEventListener('change', filterAndSort);
+      priceRange.addEventListener('input', function() {
+        priceDisplay.textContent = '$' + this.value;
+        filterAndSort();
+      });
+      applyFiltersBtn.addEventListener('click', filterAndSort);
+      clearFiltersBtn.addEventListener('click', function() {
+        filterCategories.forEach(cb => cb.checked = cb.value === 'all');
+        filterRoasts.forEach(cb => cb.checked = false);
+        priceRange.value = 50;
+        priceDisplay.textContent = '$50';
+        shopSearchInput.value = '';
+        sortSelect.value = 'default';
+        filterAndSort();
+      });
+
+      // ===== GLOBAL SEARCH OVERLAY =====
+      function openSearch() {
+        searchOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => globalSearchInput.focus(), 100);
+      }
+      function closeSearch() {
+        searchOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        globalSearchInput.value = '';
+        globalSearchResults.classList.remove('has-results');
+        globalSearchResults.innerHTML = '';
+      }
+
+      searchToggle.addEventListener('click', openSearch);
+      searchClose.addEventListener('click', closeSearch);
+      searchOverlay.addEventListener('click', function(e) {
+        if (e.target === this) closeSearch();
+      });
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && searchOverlay.classList.contains('active')) closeSearch();
+      });
+
+      globalSearchInput.addEventListener('input', function() {
+        const term = this.value.trim().toLowerCase();
+        if (!term) {
+          globalSearchResults.classList.remove('has-results');
+          globalSearchResults.innerHTML = '';
+          return;
+        }
+        const results = products.filter(p =>
+          p.name.toLowerCase().includes(term) ||
+          p.category.toLowerCase().includes(term) ||
+          p.origin.toLowerCase().includes(term)
+        );
+        if (!results.length) {
+          globalSearchResults.innerHTML = `
+            <div class="no-results">
+              <p>No products found for "<strong>${this.value}</strong>"</p>
+              <p class="small text-muted">Try searching for coffee, blends, or origins</p>
+            </div>
+          `;
+          globalSearchResults.classList.add('has-results');
+          return;
+        }
+        globalSearchResults.innerHTML = results.map(p => `
+          <a href="product.html?id=${p.id}" class="result-item">
+            <div class="result-icon"><i class="fas ${p.icon}"></i></div>
+            <div class="result-info">
+              <h4>${p.name}</h4>
+              <p>${p.category} · ${p.origin}</p>
+            </div>
+            <span class="result-price">$${p.price.toFixed(2)}</span>
+          </a>
+        `).join('');
+        globalSearchResults.classList.add('has-results');
+      });
+
+      globalSearchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' && this.value.trim()) {
+          const query = encodeURIComponent(this.value.trim());
+          window.location.href = `shop.html?search=${query}`;
         }
       });
-    });
 
-    // Add to cart buttons (demo)
-    document.querySelectorAll('.btn-secondary.btn-sm.flex-fill').forEach(btn => {
-      btn.addEventListener('click', function() {
-        const productName = this.closest('.p-3').querySelector('h3').textContent;
-        alert(`Added "${productName}" to your cart!`);
-      });
-    });
+      // ===== CHECK FOR URL SEARCH PARAM =====
+      const urlParams = new URLSearchParams(window.location.search);
+      const searchParam = urlParams.get('search');
+      if (searchParam) {
+        shopSearchInput.value = searchParam;
+        filterAndSort();
+      } else {
+        renderProducts(products);
+      }
 
-    // Apply filters (demo)
-    document.querySelector('.filter-sidebar .btn-primary').addEventListener('click', function() {
-      alert('Filters applied! (Demo)');
+      priceDisplay.textContent = '$' + priceRange.value;
     });
-
-    // Clear filters (demo)
-    document.querySelector('.filter-sidebar .btn-outline-secondary').addEventListener('click', function() {
-      document.querySelectorAll('.filter-sidebar .form-check-input').forEach(cb => {
-        if (cb.hasAttribute('checked')) {
-          cb.checked = true;
-        } else {
-          cb.checked = false;
-        }
-      });
-      document.querySelector('.filter-sidebar .form-range').value = 50;
-      alert('Filters cleared! (Demo)');
-    });
-
-    // Price range display
-    const rangeInput = document.querySelector('.filter-sidebar .form-range');
-    const priceLabels = document.querySelectorAll('.filter-sidebar .price-labels span');
-    rangeInput.addEventListener('input', function() {
-      const val = this.value;
-      priceLabels[1].textContent = '$' + val;
-    });
-  });
-</script>
+  </script>
 </body>
 </html>
