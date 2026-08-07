@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Checkout - The Lazy Llama Coffee Bar</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================
+       COMPLETE CSS – THE LAZY LLAMA COFFEE BAR (Checkout)
+       ======================================== */
+
+    /* ===== 1. ROOT VARIABLES ===== */
+    :root {
+      --brown: #5D4037;
+      --beige: #D7CCC8;
+      --coral: #FF8A65;
+      --white: #F5F5F5;
+      --brown-dark: #3E2723;
+      --brown-light: #795548;
+      --beige-light: #E9E2DE;
+      --beige-dark: #C8BBB5;
+      --coral-dark: #F4511E;
+      --text: #241C19;
+      --text-muted: #746B67;
+      --border: rgba(93,64,55,0.14);
+      --white-pure: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 8px 25px rgba(62,39,35,0.07);
+      --shadow-md: 0 20px 50px rgba(62,39,35,0.12);
+      --shadow-lg: 0 35px 80px rgba(62,39,35,0.16);
+      --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    /* ===== 2. RESET & BASE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, .serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; padding: 0; }
+
+    ::selection { background: var(--coral); color: var(--white-pure); }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* ===== 3. BOOTSTRAP OVERRIDES ===== */
+    .btn {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      padding: 0.65rem 2rem;
+      transition: all 0.35s ease;
+      border-width: 2px;
+    }
+    .btn-primary {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-secondary {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: var(--coral-dark);
+      border-color: var(--coral-dark);
+      transform: translateY(-2px);
+    }
+    .btn-outline-brown {
+      background: transparent;
+      border-color: var(--brown);
+      color: var(--brown);
+    }
+    .btn-outline-brown:hover {
+      background: var(--brown);
+      color: #fff;
+      transform: translateY(-2px);
+    }
+    .btn-light-brown {
+      background: var(--white);
+      border-color: var(--white);
+      color: var(--brown);
+    }
+    .btn-light-brown:hover {
+      background: var(--beige-light);
+      border-color: var(--beige-light);
+      transform: translateY(-2px);
+    }
+
+    .bg-coral { background: var(--coral); }
+    .text-brown { color: var(--brown); }
+    .text-coral { color: var(--coral); }
+
+    /* ===== 4. NAVBAR ===== */
+    .navbar {
+      background: rgba(245,245,245,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .navbar-brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: var(--brown) !important;
+    }
+    .navbar-brand .nav-logo {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-right: 6px;
+    }
+
+    /* ===== 5. CHECKOUT STEPS BAR ===== */
+    .checkout-steps-bar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 0;
+    }
+    .checkout-step-indicator {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      opacity: 0.5;
+      transition: all 0.4s ease;
+    }
+    .checkout-step-indicator.active {
+      opacity: 1;
+      color: var(--brown);
+    }
+    .checkout-step-indicator .step-circle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      font-weight: 700;
+      font-size: 0.8rem;
+      transition: all 0.4s ease;
+      background: var(--white);
+    }
+    .checkout-step-indicator.active .step-circle {
+      border-color: var(--brown);
+      background: var(--brown);
+      color: #fff;
+    }
+    .checkout-step-indicator.done .step-circle {
+      border-color: var(--coral);
+      background: var(--coral);
+      color: #fff;
+    }
+    .step-connector {
+      width: 30px;
+      height: 2px;
+      background: var(--border);
+      flex-shrink: 0;
+      transition: background 0.4s ease;
+    }
+    .step-connector.done {
+      background: var(--coral);
+    }
+
+    /* ===== 6. CHECKOUT STEPS (3D cards) ===== */
+    .checkout-step {
+      display: none;
+      animation: fadeInUp 0.5s var(--transition-smooth);
+    }
+    .checkout-step.active {
+      display: block;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .checkout-step h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1.5rem;
+      font-family: var(--font-serif);
+    }
+
+    /* ===== 7. FORM ELEMENTS ===== */
+    .form-group {
+      margin-bottom: 1rem;
+    }
+    .form-group label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.3rem;
+      color: var(--text);
+    }
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      background: var(--white);
+      font-size: 1rem;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      min-height: 52px;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      outline: none;
+      border-color: var(--coral);
+      box-shadow: 0 0 0 4px rgba(255,138,101,0.12);
+    }
+    .form-group textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    /* ===== 8. PAYMENT METHODS (3D) ===== */
+    .payment-methods {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.8rem 1.2rem;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+    .payment-option:hover {
+      border-color: var(--brown);
+      transform: translateX(4px);
+      box-shadow: var(--shadow-sm);
+    }
+    .payment-option input[type="radio"] {
+      accent-color: var(--brown);
+      width: 18px;
+      height: 18px;
+      flex-shrink: 0;
+    }
+    .payment-option .payment-icon {
+      font-size: 1.4rem;
+      color: var(--brown-light);
+      width: 32px;
+      text-align: center;
+    }
+    .payment-option .payment-label {
+      font-weight: 500;
+    }
+    .payment-option.selected {
+      border-color: var(--brown);
+      background: var(--beige-light);
+    }
+
+    .card-details {
+      padding: 1.5rem;
+      background: var(--beige-light);
+      border-radius: var(--radius-sm);
+      margin-top: 1rem;
+      display: none;
+      animation: fadeInUp 0.4s var(--transition-smooth);
+    }
+    .card-details.visible {
+      display: block;
+    }
+
+    /* ===== 9. ORDER SUMMARY SIDEBAR (3D) ===== */
+    .order-summary-sidebar {
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      position: sticky;
+      top: 100px;
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.5s ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
+    }
+    .order-summary-sidebar:hover {
+      transform: translateY(-4px) rotateX(1deg) rotateY(2deg);
+      box-shadow: var(--shadow-md);
+    }
+    .order-summary-sidebar h4 {
+      font-family: var(--font-serif);
+      margin-bottom: 1rem;
+      font-size: 1.3rem;
+    }
+    .sidebar-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.4rem 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .sidebar-item:last-of-type {
+      border-bottom: none;
+    }
+    .sidebar-item .item-name {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .sidebar-item .item-name i {
+      color: var(--brown-light);
+      font-size: 0.9rem;
+    }
+
+    .sidebar-totals {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .sidebar-totals .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      color: var(--text-muted);
+    }
+    .sidebar-totals .summary-row.total {
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 1.2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 0.75rem;
+      margin-top: 0.3rem;
+    }
+
+    /* ===== 10. REVIEW STEP ===== */
+    .review-item {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .review-item:last-child {
+      border-bottom: none;
+    }
+    .review-summary {
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+
+    /* ===== 11. FORM ACTIONS ===== */
+    .form-actions {
+      display: flex;
+      gap: 0.75rem;
+      margin-top: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    /* ===== 12. FOOTER ===== */
+    .footer {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 3rem 0 2rem;
+    }
+    .footer h3 { color: #fff; font-size: 1.6rem; }
+    .footer a { opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+    .footer a:hover { opacity: 1; color: var(--coral); }
+    .footer .footer-links ul { padding: 0; list-style: none; }
+    .footer .footer-links ul li { margin-bottom: 0.5rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* ===== 13. RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .order-summary-sidebar {
+        position: static;
+        margin-top: 1.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .checkout-steps-bar {
+        flex-wrap: wrap;
+        gap: 0.25rem;
+      }
+      .checkout-step-indicator .step-circle {
+        width: 26px;
+        height: 26px;
+        font-size: 0.7rem;
+      }
+      .step-connector {
+        width: 15px;
+      }
+      .checkout-step-indicator .step-label {
+        display: none;
+      }
+      .checkout-step h2 {
+        font-size: 1.4rem;
+      }
+      .footer .row { text-align: center; }
+    }
+    @media (max-width: 576px) {
+      .checkout-step-indicator .step-circle {
+        width: 22px;
+        height: 22px;
+        font-size: 0.6rem;
+      }
+      .step-connector {
+        width: 10px;
+      }
+      .form-actions {
+        flex-direction: column;
+      }
+      .form-actions .btn {
+        width: 100%;
+      }
+      .payment-option {
+        padding: 0.6rem 1rem;
+      }
+    }
+
+    /* ===== 14. SUCCESS ANIMATION ===== */
+    @keyframes successPulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    .success-icon {
+      font-size: 4rem;
+      color: var(--coral);
+      animation: successPulse 1.5s ease-in-out infinite;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navLinks">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="our-coffee.html">Our Coffee</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="locations.html">Locations</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== CHECKOUT STEPS BAR ===== -->
+<div class="container">
+  <div class="checkout-steps-bar" id="checkoutStepsBar">
+    <div class="checkout-step-indicator active" data-step="1">
+      <span class="step-circle">1</span>
+      <span class="step-label">Customer</span>
+    </div>
+    <span class="step-connector" id="connector1"></span>
+    <div class="checkout-step-indicator" data-step="2">
+      <span class="step-circle">2</span>
+      <span class="step-label">Shipping</span>
+    </div>
+    <span class="step-connector" id="connector2"></span>
+    <div class="checkout-step-indicator" data-step="3">
+      <span class="step-circle">3</span>
+      <span class="step-label">Payment</span>
+    </div>
+    <span class="step-connector" id="connector3"></span>
+    <div class="checkout-step-indicator" data-step="4">
+      <span class="step-circle">4</span>
+      <span class="step-label">Review</span>
+    </div>
+  </div>
+</div>
+
+<!-- ===== CHECKOUT CONTENT ===== -->
+<section class="py-4">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Checkout Form -->
+      <div class="col-lg-8">
+        <!-- Step 1: Customer Info -->
+        <div class="checkout-step active" id="step1">
+          <h2><i class="fas fa-user text-coral me-2"></i>Customer Information</h2>
+          <form id="customerForm">
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutName">Full Name <span class="text-coral">*</span></label>
+                  <input type="text" id="checkoutName" class="form-control" placeholder="John Doe" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutEmail">Email <span class="text-coral">*</span></label>
+                  <input type="email" id="checkoutEmail" class="form-control" placeholder="you@example.com" required>
+                </div>
+              </div>
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="checkoutPhone">Phone <span class="text-coral">*</span></label>
+                  <input type="tel" id="checkoutPhone" class="form-control" placeholder="+1 (555) 123-4567" required>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-primary" onclick="nextStep(2)">Continue <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 2: Shipping -->
+        <div class="checkout-step" id="step2">
+          <h2><i class="fas fa-truck text-coral me-2"></i>Shipping Address</h2>
+          <form id="shippingForm">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group">
+                  <label for="checkoutStreet">Street Address <span class="text-coral">*</span></label>
+                  <input type="text" id="checkoutStreet" class="form-control" placeholder="72 E, 1st Street" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutCity">City <span class="text-coral">*</span></label>
+                  <input type="text" id="checkoutCity" class="form-control" placeholder="New York" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutState">State/Province <span class="text-coral">*</span></label>
+                  <input type="text" id="checkoutState" class="form-control" placeholder="NY" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutPostal">Postal Code <span class="text-coral">*</span></label>
+                  <input type="text" id="checkoutPostal" class="form-control" placeholder="10003" required>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label for="checkoutCountry">Country <span class="text-coral">*</span></label>
+                  <select id="checkoutCountry" class="form-control" required>
+                    <option value="">Select Country</option>
+                    <option value="US">United States</option>
+                    <option value="TR">Türkiye</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="DE">Germany</option>
+                    <option value="FR">France</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline-brown" onclick="prevStep(1)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+              <button type="button" class="btn btn-primary" onclick="nextStep(3)">Continue <i class="fas fa-arrow-right ms-2"></i></button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Step 3: Payment -->
+        <div class="checkout-step" id="step3">
+          <h2><i class="fas fa-credit-card text-coral me-2"></i>Payment Method</h2>
+          <div class="payment-methods" id="paymentMethods">
+            <label class="payment-option selected" data-method="cod">
+              <input type="radio" name="payment" value="cod" checked>
+              <span class="payment-icon"><i class="fas fa-money-bill-wave"></i></span>
+              <span class="payment-label">Cash on Delivery</span>
+            </label>
+            <label class="payment-option" data-method="card">
+              <input type="radio" name="payment" value="card">
+              <span class="payment-icon"><i class="fas fa-credit-card"></i></span>
+              <span class="payment-label">Credit / Debit Card</span>
+            </label>
+            <label class="payment-option" data-method="jazzcash">
+              <input type="radio" name="payment" value="jazzcash">
+              <span class="payment-icon"><i class="fas fa-mobile-alt"></i></span>
+              <span class="payment-label">JazzCash</span>
+            </label>
+            <label class="payment-option" data-method="easypaisa">
+              <input type="radio" name="payment" value="easypaisa">
+              <span class="payment-icon"><i class="fas fa-mobile-screen-button"></i></span>
+              <span class="payment-label">Easypaisa</span>
+            </label>
+          </div>
+
+          <div class="card-details" id="cardDetails">
+            <div class="row g-3">
+              <div class="col-12">
+                <div class="form-group">
+                  <label>Card Number</label>
+                  <input type="text" class="form-control" placeholder="1234 5678 9012 3456">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>Expiry Date</label>
+                  <input type="text" class="form-control" placeholder="MM/YY">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="form-group">
+                  <label>CVV</label>
+                  <input type="text" class="form-control" placeholder="123">
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn btn-outline-brown" onclick="prevStep(2)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+            <button type="button" class="btn btn-primary" onclick="nextStep(4)">Continue <i class="fas fa-arrow-right ms-2"></i></button>
+          </div>
+        </div>
+
+        <!-- Step 4: Review -->
+        <div class="checkout-step" id="step4">
+          <h2><i class="fas fa-check-circle text-coral me-2"></i>Review Your Order</h2>
+          <div class="bg-white p-4 rounded-4 border">
+            <div class="review-items">
+              <div class="review-item">
+                <span><i class="fas fa-mug-hot text-brown me-2"></i>Lazy Llama House Blend x 1</span>
+                <span>$18.99</span>
+              </div>
+              <div class="review-item">
+                <span><i class="fas fa-mug-saucer text-brown me-2"></i>Alaçatı Espresso x 1</span>
+                <span>$22.99</span>
+              </div>
+            </div>
+            <div class="review-summary">
+              <div class="summary-row"><span>Subtotal</span><span>$41.98</span></div>
+              <div class="summary-row"><span>Shipping</span><span>$0.00</span></div>
+              <div class="summary-row total"><span>Total</span><span>$41.98</span></div>
+            </div>
+            <div class="form-actions">
+              <button type="button" class="btn btn-outline-brown" onclick="prevStep(3)"><i class="fas fa-arrow-left me-2"></i>Back</button>
+              <button type="button" class="btn btn-primary" id="placeOrderBtn">
+                <i class="fas fa-check me-2"></i>Place Order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Order Summary Sidebar -->
+      <div class="col-lg-4">
+        <div class="order-summary-sidebar">
+          <h4><i class="fas fa-shopping-bag text-coral me-2"></i>Your Order</h4>
+          <div class="sidebar-item">
+            <span class="item-name"><i class="fas fa-mug-hot"></i> Lazy Llama House Blend</span>
+            <span>$18.99</span>
+          </div>
+          <div class="sidebar-item">
+            <span class="item-name"><i class="fas fa-mug-saucer"></i> Alaçatı Espresso</span>
+            <span>$22.99</span>
+          </div>
+          <div class="sidebar-totals">
+            <div class="summary-row"><span>Subtotal</span><span>$41.98</span></div>
+            <div class="summary-row"><span>Shipping</span><span>$0.00</span></div>
+            <div class="summary-row total"><span>Total</span><span>$41.98</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <h3>The Lazy Llama<br>Coffee Bar</h3>
+        <p class="opacity-75">Good Coffee. Lazy Moments.</p>
+        <div class="d-flex gap-3">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram fs-4"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook fs-4"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter fs-4"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Shop</h4><ul><li><a href="shop.html">All Coffees</a></li><li><a href="shop.html">Blends</a></li><li><a href="shop.html">Single Origin</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Company</h4><ul><li><a href="about.html">About</a></li><li><a href="our-coffee.html">Our Coffee</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Locations</h4><ul><li><a href="locations.html">New York</a></li><li><a href="locations.html">Alaçatı</a></li></ul></div>
+    </div>
+    <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between mt-4">
+      <span>&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</span>
+      <span>Follow us: @thelazyllamacoffeebar</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Checkout JavaScript -->
+<script>
+  let currentStep = 1;
+  const totalSteps = 4;
+
+  // Payment method selection
+  document.querySelectorAll('.payment-option').forEach(option => {
+    option.addEventListener('click', function() {
+      document.querySelectorAll('.payment-option').forEach(o => o.classList.remove('selected'));
+      this.classList.add('selected');
+      this.querySelector('input[type="radio"]').checked = true;
+
+      const method = this.dataset.method;
+      const cardDetails = document.getElementById('cardDetails');
+      if (method === 'card') {
+        cardDetails.classList.add('visible');
+      } else {
+        cardDetails.classList.remove('visible');
+      }
+    });
+  });
+
+  // Navigate to next step
+  function nextStep(step) {
+    if (step > totalSteps) return;
+    // Validate current step (basic validation)
+    if (step === 2) {
+      const name = document.getElementById('checkoutName')?.value.trim();
+      const email = document.getElementById('checkoutEmail')?.value.trim();
+      const phone = document.getElementById('checkoutPhone')?.value.trim();
+      if (!name || !email || !phone) {
+        alert('Please fill in all required fields.');
+        return;
+      }
+    }
+    if (step === 3) {
+      const street = document.getElementById('checkoutStreet')?.value.trim();
+      const city = document.getElementById('checkoutCity')?.value.trim();
+      const state = document.getElementById('checkoutState')?.value.trim();
+      const postal = document.getElementById('checkoutPostal')?.value.trim();
+      const country = document.getElementById('checkoutCountry')?.value;
+      if (!street || !city || !state || !postal || !country) {
+        alert('Please fill in all shipping fields.');
+        return;
+      }
+    }
+
+    showStep(step);
+  }
+
+  function prevStep(step) {
+    if (step < 1) return;
+    showStep(step);
+  }
+
+  function showStep(step) {
+    // Hide all steps
+    document.querySelectorAll('.checkout-step').forEach(el => el.classList.remove('active'));
+    // Show target step
+    const target = document.getElementById('step' + step);
+    if (target) target.classList.add('active');
+
+    // Update step indicators
+    document.querySelectorAll('.checkout-step-indicator').forEach(el => {
+      const stepNum = parseInt(el.dataset.step);
+      el.classList.remove('active', 'done');
+      if (stepNum === step) {
+        el.classList.add('active');
+      } else if (stepNum < step) {
+        el.classList.add('done');
+      }
+    });
+
+    // Update connectors
+    document.querySelectorAll('.step-connector').forEach((el, index) => {
+      const connectorStep = index + 1;
+      if (connectorStep < step) {
+        el.classList.add('done');
+      } else {
+        el.classList.remove('done');
+      }
+    });
+
+    currentStep = step;
+  }
+
+  // Place order
+  document.getElementById('placeOrderBtn')?.addEventListener('click', function() {
+    // Show success message (simple demo)
+    const reviewStep = document.getElementById('step4');
+    const content = reviewStep.querySelector('.bg-white');
+    content.innerHTML = `
+      <div class="text-center py-4">
+        <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+        <h3 class="mt-3">Order Placed Successfully!</h3>
+        <p class="text-muted">Thank you for your order. We'll send you a confirmation email shortly.</p>
+        <p class="text-muted small">Order #LL-2024-003</p>
+        <a href="index.html" class="btn btn-primary mt-3">Continue Shopping</a>
+      </div>
+    `;
+  });
+</script>
+
+</body>
+</html>

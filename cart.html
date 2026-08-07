@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cart - The Lazy Llama Coffee Bar</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================
+       COMPLETE CSS – THE LAZY LLAMA COFFEE BAR (Cart)
+       ======================================== */
+
+    /* ===== 1. ROOT VARIABLES ===== */
+    :root {
+      --brown: #5D4037;
+      --beige: #D7CCC8;
+      --coral: #FF8A65;
+      --white: #F5F5F5;
+      --brown-dark: #3E2723;
+      --brown-light: #795548;
+      --beige-light: #E9E2DE;
+      --beige-dark: #C8BBB5;
+      --coral-dark: #F4511E;
+      --text: #241C19;
+      --text-muted: #746B67;
+      --border: rgba(93,64,55,0.14);
+      --white-pure: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --space-xs: 8px;
+      --space-sm: 16px;
+      --space-md: 24px;
+      --space-lg: 40px;
+      --space-xl: 64px;
+      --space-2xl: 96px;
+      --space-3xl: 140px;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 8px 25px rgba(62,39,35,0.07);
+      --shadow-md: 0 20px 50px rgba(62,39,35,0.12);
+      --shadow-lg: 0 35px 80px rgba(62,39,35,0.16);
+      --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    /* ===== 2. RESET & BASE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, .serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+    img { max-width: 100%; display: block; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; padding: 0; }
+
+    ::selection { background: var(--coral); color: var(--white-pure); }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* ===== 3. BOOTSTRAP OVERRIDES ===== */
+    .btn {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      padding: 0.65rem 2rem;
+      transition: all 0.35s ease;
+      border-width: 2px;
+    }
+    .btn-primary {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-secondary {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: var(--coral-dark);
+      border-color: var(--coral-dark);
+      transform: translateY(-2px);
+    }
+    .btn-outline-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .btn-outline-secondary:hover {
+      background: var(--beige-light);
+      border-color: var(--brown);
+      color: var(--brown);
+      transform: translateY(-2px);
+    }
+    .btn-outline-danger {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .btn-outline-danger:hover {
+      background: #fce4ec;
+      border-color: #e57373;
+      color: #c62828;
+      transform: scale(1.05);
+    }
+
+    .bg-coral { background: var(--coral); }
+    .text-brown { color: var(--brown); }
+    .text-coral { color: var(--coral); }
+
+    /* ===== 4. NAVBAR ===== */
+    .navbar {
+      background: rgba(245,245,245,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .navbar-brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: var(--brown) !important;
+    }
+    .navbar-brand .nav-logo {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-right: 6px;
+    }
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted) !important;
+      padding: 0.5rem 0.8rem !important;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0.8rem;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width 0.4s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--brown) !important;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: calc(100% - 1.6rem);
+    }
+    .navbar .nav-actions a {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      position: relative;
+      margin-left: 6px;
+    }
+    .navbar .nav-actions a:hover { color: var(--brown); }
+    .cart-count, .wishlist-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      background: var(--coral);
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+    }
+    .nav-cta {
+      font-size: 0.75rem !important;
+      padding: 0.4rem 1.2rem !important;
+      min-height: 38px;
+      margin-left: 10px;
+    }
+
+    /* ===== 5. PAGE HERO ===== */
+    .page-hero {
+      padding: 4rem 0;
+      background: var(--beige-light);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      animation: fadeInUp 0.8s var(--transition-smooth);
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s var(--transition-smooth) 0.2s both;
+    }
+    .page-hero .hero-llama {
+      font-size: 5rem;
+      color: var(--brown-light);
+      opacity: 0.06;
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* ===== 6. CART ITEMS (3D) ===== */
+    .cart-item {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem 0;
+      border-bottom: 1px solid var(--border);
+      align-items: center;
+      background: #fff;
+      padding: 1rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 0.75rem;
+      transition: transform 0.4s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.4s ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
+    }
+    .cart-item:hover {
+      transform: translateX(6px) rotateY(-2deg);
+      box-shadow: var(--shadow-sm);
+    }
+    .cart-item-image {
+      width: 70px;
+      height: 70px;
+      border-radius: var(--radius-sm);
+      background: var(--beige);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.2rem;
+      color: var(--brown-light);
+      flex-shrink: 0;
+      transition: transform 0.4s ease;
+    }
+    .cart-item:hover .cart-item-image {
+      transform: scale(1.05) rotate(-3deg);
+    }
+    .cart-item h5 {
+      font-size: 1.1rem;
+      font-family: var(--font-serif);
+      margin-bottom: 0.2rem;
+    }
+    .cart-item .text-muted {
+      font-weight: 500;
+    }
+    .cart-item .qty-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid var(--border);
+      background: transparent;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+    .cart-item .qty-btn:hover {
+      background: var(--beige-light);
+      border-color: var(--brown);
+      transform: scale(1.08);
+    }
+    .cart-item .qty-btn:active {
+      transform: scale(0.9);
+    }
+
+    /* ===== 7. ORDER SUMMARY CARD (3D) ===== */
+    .summary-card {
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.5s ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
+    }
+    .summary-card:hover {
+      transform: translateY(-6px) rotateX(2deg) rotateY(2deg);
+      box-shadow: var(--shadow-md);
+    }
+    .summary-card h4 {
+      font-family: var(--font-serif);
+      margin-bottom: 1rem;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 0.3rem 0;
+      color: var(--text-muted);
+    }
+    .summary-row.total {
+      font-weight: 700;
+      color: var(--brown);
+      font-size: 1.2rem;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+      margin-top: 0.5rem;
+    }
+    .summary-card .btn {
+      width: 100%;
+    }
+    .summary-card .btn-primary {
+      margin-top: 1rem;
+    }
+    .summary-card .btn-outline-secondary {
+      margin-top: 0.5rem;
+    }
+
+    /* ===== 8. FOOTER ===== */
+    .footer {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 4rem 0 2rem;
+    }
+    .footer h3 { color: #fff; font-size: 1.6rem; }
+    .footer a { opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+    .footer a:hover { opacity: 1; color: var(--coral); }
+    .footer .footer-links ul { padding: 0; list-style: none; }
+    .footer .footer-links ul li { margin-bottom: 0.5rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* ===== 9. ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== 10. RESPONSIVE ===== */
+    @media (max-width: 768px) {
+      .page-hero { padding: 2.5rem 0; }
+      .page-hero .hero-llama { display: none; }
+      .cart-item { flex-wrap: wrap; }
+      .cart-item .flex-grow-1 { flex: 0 0 100%; }
+      .cart-item .d-flex { width: 100%; justify-content: flex-end; }
+      .footer .row { text-align: center; }
+    }
+    @media (max-width: 576px) {
+      .cart-item-image { width: 50px; height: 50px; font-size: 1.6rem; }
+      .summary-card { padding: 1rem; }
+    }
+
+    /* ===== 11. EMPTY CART STATE (hidden by default) ===== */
+    .cart-empty {
+      text-align: center;
+      padding: 4rem 0;
+      display: none;
+    }
+    .cart-empty i {
+      font-size: 4rem;
+      color: var(--beige-dark);
+      margin-bottom: 1rem;
+    }
+    .cart-empty h3 {
+      font-family: var(--font-serif);
+      color: var(--brown);
+    }
+    .cart-empty p {
+      color: var(--text-muted);
+      max-width: 400px;
+      margin: 0 auto 1.5rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navLinks">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="our-coffee.html">Our Coffee</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="locations.html">Locations</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <a href="#" class="text-muted"><i class="fas fa-search"></i></a>
+        <a href="account.html" class="text-muted"><i class="fas fa-user"></i></a>
+        <a href="wishlist.html" class="text-muted position-relative">
+          <i class="fas fa-heart"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">0</span>
+        </a>
+        <a href="cart.html" class="text-muted position-relative">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">2</span>
+        </a>
+        <a href="checkout.html" class="btn btn-primary btn-sm">Order Coffee</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Shopping Cart</h1>
+    <p>Review your items before checkout</p>
+    <div class="hero-llama"><i class="fas fa-otter"></i></div>
+  </div>
+</section>
+
+<!-- ===== CART CONTENT ===== -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Cart Items -->
+      <div class="col-lg-8">
+        <!-- Cart items (visible when cart not empty) -->
+        <div id="cartItems">
+          <div class="cart-item">
+            <div class="cart-item-image"><i class="fas fa-mug-hot"></i></div>
+            <div class="flex-grow-1">
+              <h5>Lazy Llama House Blend</h5>
+              <p class="text-muted">$18.99</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <button class="qty-btn">-</button>
+              <span style="min-width: 24px; text-align: center;">1</span>
+              <button class="qty-btn">+</button>
+              <button class="btn btn-outline-danger btn-sm" style="border-radius:50%; width:32px; height:32px; padding:0;"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
+          <div class="cart-item">
+            <div class="cart-item-image"><i class="fas fa-mug-saucer"></i></div>
+            <div class="flex-grow-1">
+              <h5>Alaçatı Espresso</h5>
+              <p class="text-muted">$22.99</p>
+            </div>
+            <div class="d-flex align-items-center gap-2">
+              <button class="qty-btn">-</button>
+              <span style="min-width: 24px; text-align: center;">1</span>
+              <button class="qty-btn">+</button>
+              <button class="btn btn-outline-danger btn-sm" style="border-radius:50%; width:32px; height:32px; padding:0;"><i class="fas fa-times"></i></button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Empty Cart State (hidden by default) -->
+        <div class="cart-empty" id="cartEmpty">
+          <i class="fas fa-shopping-bag"></i>
+          <h3>Your cart is empty</h3>
+          <p>Looks like you haven't added any coffee to your cart yet. Start exploring our selection!</p>
+          <a href="shop.html" class="btn btn-primary">Start Shopping</a>
+        </div>
+      </div>
+
+      <!-- Order Summary -->
+      <div class="col-lg-4">
+        <div class="summary-card">
+          <h4>Order Summary</h4>
+          <div class="summary-row"><span>Subtotal</span><span>$41.98</span></div>
+          <div class="summary-row"><span>Shipping</span><span>$0.00</span></div>
+          <div class="summary-row total"><span>Total</span><span>$41.98</span></div>
+          <a href="checkout.html" class="btn btn-primary">Proceed to Checkout</a>
+          <button class="btn btn-outline-secondary" id="clearCartBtn">Clear Cart</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <h3>The Lazy Llama<br>Coffee Bar</h3>
+        <p class="opacity-75">Good Coffee. Lazy Moments.</p>
+        <div class="d-flex gap-3">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram fs-4"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook fs-4"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter fs-4"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Shop</h4><ul><li><a href="shop.html">All Coffees</a></li><li><a href="shop.html">Blends</a></li><li><a href="shop.html">Single Origin</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Company</h4><ul><li><a href="about.html">About</a></li><li><a href="our-coffee.html">Our Coffee</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Locations</h4><ul><li><a href="locations.html">New York</a></li><li><a href="locations.html">Alaçatı</a></li></ul></div>
+    </div>
+    <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between mt-4">
+      <span>&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</span>
+      <span>Follow us: @thelazyllamacoffeebar</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Simple cart interactivity -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const clearBtn = document.getElementById('clearCartBtn');
+    const cartItems = document.getElementById('cartItems');
+    const cartEmpty = document.getElementById('cartEmpty');
+
+    // Clear Cart functionality
+    clearBtn.addEventListener('click', function() {
+      cartItems.style.display = 'none';
+      cartEmpty.style.display = 'block';
+      // Update cart count in navbar
+      const cartBadge = document.querySelector('.nav-actions .cart-count');
+      if (cartBadge) cartBadge.textContent = '0';
+    });
+
+    // Quantity buttons (simple demo)
+    document.querySelectorAll('.qty-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const parent = this.closest('.d-flex');
+        const span = parent.querySelector('span');
+        let val = parseInt(span.textContent);
+        if (this.textContent === '+') {
+          val++;
+        } else if (this.textContent === '-' && val > 1) {
+          val--;
+        }
+        span.textContent = val;
+        // Update total (simple demo)
+        updateTotal();
+      });
+    });
+
+    // Remove item buttons
+    document.querySelectorAll('.btn-outline-danger').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const item = this.closest('.cart-item');
+        item.remove();
+        // If no items left, show empty state
+        if (document.querySelectorAll('.cart-item').length === 0) {
+          cartItems.style.display = 'none';
+          cartEmpty.style.display = 'block';
+        }
+        updateTotal();
+      });
+    });
+
+    function updateTotal() {
+      // Simple demo: recalc total based on visible items
+      let total = 0;
+      document.querySelectorAll('.cart-item').forEach(item => {
+        const priceText = item.querySelector('.text-muted').textContent;
+        const price = parseFloat(priceText.replace('$', ''));
+        const qty = parseInt(item.querySelector('.d-flex span').textContent);
+        total += price * qty;
+      });
+      // Update summary
+      document.querySelector('.summary-row:first-child span:last-child').textContent = '$' + total.toFixed(2);
+      document.querySelector('.summary-row.total span:last-child').textContent = '$' + total.toFixed(2);
+    }
+  });
+</script>
+</body>
+</html>

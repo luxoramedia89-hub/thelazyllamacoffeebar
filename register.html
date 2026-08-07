@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Register - The Lazy Llama Coffee Bar</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================
+       COMPLETE CSS – THE LAZY LLAMA COFFEE BAR (Register)
+       ======================================== */
+
+    /* ===== 1. ROOT VARIABLES ===== */
+    :root {
+      --brown: #5D4037;
+      --beige: #D7CCC8;
+      --coral: #FF8A65;
+      --white: #F5F5F5;
+      --brown-dark: #3E2723;
+      --brown-light: #795548;
+      --beige-light: #E9E2DE;
+      --beige-dark: #C8BBB5;
+      --coral-dark: #F4511E;
+      --text: #241C19;
+      --text-muted: #746B67;
+      --border: rgba(93,64,55,0.14);
+      --white-pure: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 8px 25px rgba(62,39,35,0.07);
+      --shadow-md: 0 20px 50px rgba(62,39,35,0.12);
+      --shadow-lg: 0 35px 80px rgba(62,39,35,0.16);
+      --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    /* ===== 2. RESET & BASE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+    h1, h2, h3, h4, h5, .serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; }
+
+    ::selection { background: var(--coral); color: var(--white-pure); }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* ===== 3. BOOTSTRAP OVERRIDES ===== */
+    .btn {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      padding: 0.65rem 2rem;
+      transition: all 0.35s ease;
+      border-width: 2px;
+    }
+    .btn-primary {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-primary:active {
+      transform: scale(0.97);
+    }
+    .btn-success {
+      background: #2e7d32;
+      border-color: #2e7d32;
+      color: #fff;
+    }
+    .btn-success:hover {
+      background: #1b5e20;
+      border-color: #1b5e20;
+      transform: translateY(-2px) scale(1.02);
+    }
+
+    .text-brown { color: var(--brown); }
+    .text-coral { color: var(--coral); }
+    .bg-coral { background: var(--coral); }
+
+    /* ===== 4. NAVBAR ===== */
+    .navbar {
+      background: rgba(245,245,245,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .navbar-brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: var(--brown) !important;
+    }
+    .navbar-brand .nav-logo {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-right: 6px;
+    }
+
+    /* ===== 5. AUTH SECTION ===== */
+    .auth-section {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1rem;
+      background: linear-gradient(145deg, var(--beige-light), var(--white));
+      position: relative;
+      overflow: hidden;
+      min-height: 80vh;
+    }
+
+    /* Floating decorative beans */
+    .auth-bean {
+      position: absolute;
+      width: 30px;
+      height: 40px;
+      background: radial-gradient(ellipse at 40% 35%, #6d4c41, #3e2723);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      transform: rotate(30deg);
+      box-shadow: inset -4px -4px 10px rgba(0,0,0,0.3);
+      animation: floatBean 12s ease-in-out infinite;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .auth-bean::after {
+      content: '';
+      position: absolute;
+      top: 20%;
+      left: 30%;
+      width: 6px;
+      height: 12px;
+      background: rgba(255,255,255,0.08);
+      border-radius: 50%;
+      transform: rotate(-20deg);
+    }
+    .auth-bean:nth-child(1) { left: 5%; top: 20%; animation-delay: 0s; width: 25px; height: 35px; }
+    .auth-bean:nth-child(2) { right: 8%; top: 30%; animation-delay: 3s; width: 35px; height: 45px; }
+    .auth-bean:nth-child(3) { left: 10%; bottom: 25%; animation-delay: 6s; width: 28px; height: 38px; }
+    .auth-bean:nth-child(4) { right: 12%; bottom: 20%; animation-delay: 9s; width: 32px; height: 42px; }
+    @keyframes floatBean {
+      0%, 100% { transform: translateY(0) rotate(30deg) scale(1); }
+      50% { transform: translateY(-50px) rotate(60deg) scale(1.08); }
+    }
+
+    /* Background llama */
+    .auth-bg-llama {
+      position: absolute;
+      font-size: 20rem;
+      color: var(--brown);
+      opacity: 0.03;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%) rotate(-10deg);
+      pointer-events: none;
+      animation: floatLlamaBg 15s ease-in-out infinite;
+    }
+    @keyframes floatLlamaBg {
+      0%, 100% { transform: translateY(-50%) rotate(-10deg) scale(1); }
+      50% { transform: translateY(-60%) rotate(-5deg) scale(1.05); }
+    }
+
+    /* ===== 6. AUTH CARD (3D) ===== */
+    .auth-card {
+      max-width: 460px;
+      width: 100%;
+      padding: 2.5rem 2rem;
+      background: #fff;
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      z-index: 2;
+      transition: transform 0.6s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.6s ease;
+      transform-style: preserve-3d;
+      perspective: 800px;
+    }
+    .auth-card:hover {
+      transform: translateY(-6px) rotateX(2deg) rotateY(2deg);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-card .auth-header {
+      text-align: center;
+      margin-bottom: 1.5rem;
+    }
+    .auth-card .auth-header .auth-icon {
+      font-size: 3.5rem;
+      color: var(--brown);
+      display: block;
+      margin-bottom: 0.5rem;
+      transition: transform 0.5s ease;
+    }
+    .auth-card:hover .auth-header .auth-icon {
+      transform: scale(1.08) rotate(-5deg);
+    }
+    .auth-card .auth-header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+    }
+    .auth-card .auth-header p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .auth-card .form-label {
+      font-weight: 500;
+      font-size: 0.85rem;
+      color: var(--text);
+    }
+    .auth-card .form-control {
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 0.7rem 1rem;
+      min-height: 48px;
+      transition: all 0.3s ease;
+      background: var(--white);
+    }
+    .auth-card .form-control:focus {
+      border-color: var(--coral);
+      box-shadow: 0 0 0 4px rgba(255,138,101,0.12);
+    }
+    .auth-card .form-control::placeholder {
+      color: #bbb;
+    }
+    .auth-card .form-control.is-invalid {
+      border-color: #dc3545;
+    }
+    .auth-card .form-control.is-invalid:focus {
+      box-shadow: 0 0 0 4px rgba(220,53,69,0.12);
+    }
+    .auth-card .form-control.is-valid {
+      border-color: #28a745;
+    }
+    .auth-card .form-control.is-valid:focus {
+      box-shadow: 0 0 0 4px rgba(40,167,69,0.12);
+    }
+
+    .auth-card .input-icon-wrapper {
+      position: relative;
+    }
+    .auth-card .input-icon-wrapper .input-icon {
+      position: absolute;
+      left: 1rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1rem;
+      transition: color 0.3s ease;
+    }
+    .auth-card .input-icon-wrapper .form-control {
+      padding-left: 2.8rem;
+    }
+    .auth-card .input-icon-wrapper .form-control:focus ~ .input-icon {
+      color: var(--coral);
+    }
+
+    .auth-card .password-strength {
+      font-size: 0.75rem;
+      margin-top: 0.3rem;
+    }
+    .auth-card .password-strength .strength-bar {
+      display: flex;
+      gap: 0.25rem;
+      margin-top: 0.2rem;
+    }
+    .auth-card .password-strength .strength-bar span {
+      height: 4px;
+      flex: 1;
+      background: var(--border);
+      border-radius: 4px;
+      transition: background 0.3s ease;
+    }
+    .auth-card .password-strength .strength-bar span.weak { background: #dc3545; }
+    .auth-card .password-strength .strength-bar span.medium { background: #ffc107; }
+    .auth-card .password-strength .strength-bar span.strong { background: #28a745; }
+
+    .auth-card .btn-primary {
+      width: 100%;
+      margin-top: 0.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .auth-card .btn-primary::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(255,255,255,0.08);
+      transform: scale(0);
+      border-radius: 50%;
+      transition: transform 0.6s var(--transition-smooth);
+    }
+    .auth-card .btn-primary:active::after {
+      transform: scale(3);
+    }
+
+    .auth-card .auth-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+    .auth-card .auth-footer a {
+      color: var(--brown);
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+    .auth-card .auth-footer a:hover {
+      color: var(--coral);
+    }
+
+    /* ===== 7. SUCCESS STATE ===== */
+    .auth-card .form-success {
+      display: none;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+    .auth-card .form-success .success-icon {
+      font-size: 4rem;
+      color: var(--coral);
+      animation: successPulse 1.5s ease-in-out infinite;
+    }
+    .auth-card .form-success h3 {
+      font-family: var(--font-serif);
+      margin-top: 0.5rem;
+      color: var(--brown);
+    }
+    .auth-card .form-success p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    @keyframes successPulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    /* ===== 8. FOOTER ===== */
+    .footer {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 2rem 0;
+      margin-top: auto;
+    }
+    .footer a {
+      opacity: 0.7;
+      transition: opacity 0.3s, color 0.3s;
+    }
+    .footer a:hover {
+      opacity: 1;
+      color: var(--coral);
+    }
+    .footer p {
+      margin: 0;
+    }
+
+    /* ===== 9. RESPONSIVE ===== */
+    @media (max-width: 576px) {
+      .auth-card {
+        padding: 1.5rem 1.25rem;
+      }
+      .auth-card .auth-header h1 {
+        font-size: 1.8rem;
+      }
+      .auth-card .auth-header .auth-icon {
+        font-size: 2.8rem;
+      }
+      .auth-bg-llama {
+        font-size: 12rem;
+      }
+      .auth-section {
+        padding: 2rem 1rem;
+      }
+    }
+    @media (max-width: 400px) {
+      .auth-card {
+        padding: 1.25rem 1rem;
+      }
+      .auth-card .auth-header h1 {
+        font-size: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
+    </a>
+  </div>
+</nav>
+
+<!-- ===== REGISTER SECTION ===== -->
+<section class="auth-section">
+  <!-- Decorative elements -->
+  <div class="auth-bean"></div>
+  <div class="auth-bean"></div>
+  <div class="auth-bean"></div>
+  <div class="auth-bean"></div>
+  <div class="auth-bg-llama"><i class="fas fa-otter"></i></div>
+
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-5 col-md-7 col-11">
+        <div class="auth-card">
+          <!-- Form Content -->
+          <div id="formContent">
+            <div class="auth-header">
+              <span class="auth-icon"><i class="fas fa-otter"></i></span>
+              <h1>Create Account</h1>
+              <p>Join The Lazy Llama community</p>
+            </div>
+
+            <form id="registerForm" novalidate>
+              <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <div class="input-icon-wrapper">
+                  <input type="text" class="form-control" id="regName" placeholder="John Doe" required>
+                  <span class="input-icon"><i class="fas fa-user"></i></span>
+                </div>
+                <div class="invalid-feedback">Please enter your full name.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <div class="input-icon-wrapper">
+                  <input type="email" class="form-control" id="regEmail" placeholder="you@example.com" required>
+                  <span class="input-icon"><i class="fas fa-envelope"></i></span>
+                </div>
+                <div class="invalid-feedback">Please enter a valid email address.</div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Phone Number</label>
+                <div class="input-icon-wrapper">
+                  <input type="tel" class="form-control" id="regPhone" placeholder="+1 (555) 123-4567">
+                  <span class="input-icon"><i class="fas fa-phone"></i></span>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Password</label>
+                <div class="input-icon-wrapper">
+                  <input type="password" class="form-control" id="regPassword" placeholder="Create a strong password" required minlength="8">
+                  <span class="input-icon"><i class="fas fa-lock"></i></span>
+                </div>
+                <div class="invalid-feedback">Password must be at least 8 characters.</div>
+                <div class="password-strength" id="passwordStrength">
+                  <div class="strength-bar">
+                    <span id="strength1"></span>
+                    <span id="strength2"></span>
+                    <span id="strength3"></span>
+                    <span id="strength4"></span>
+                  </div>
+                  <span class="text-muted" id="strengthText">Enter a password</span>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label">Confirm Password</label>
+                <div class="input-icon-wrapper">
+                  <input type="password" class="form-control" id="regConfirmPassword" placeholder="Confirm your password" required>
+                  <span class="input-icon"><i class="fas fa-check-circle"></i></span>
+                </div>
+                <div class="invalid-feedback">Passwords do not match.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary" id="registerBtn">
+                <i class="fas fa-user-plus me-2"></i>Create Account
+              </button>
+            </form>
+
+            <div class="auth-footer">
+              <p>Already have an account? <a href="login.html">Sign in</a></p>
+            </div>
+          </div>
+
+          <!-- Success State (hidden by default) -->
+          <div class="form-success" id="formSuccess">
+            <div class="success-icon"><i class="fas fa-check-circle"></i></div>
+            <h3>Welcome to the Family!</h3>
+            <p>Your account has been created successfully. You can now sign in and start your coffee journey.</p>
+            <a href="login.html" class="btn btn-primary mt-3">
+              <i class="fas fa-sign-in-alt me-2"></i>Sign In Now
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 text-center">
+        <p class="text-muted small">&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Registration Form Interactivity -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('registerForm');
+    const nameInput = document.getElementById('regName');
+    const emailInput = document.getElementById('regEmail');
+    const phoneInput = document.getElementById('regPhone');
+    const passwordInput = document.getElementById('regPassword');
+    const confirmInput = document.getElementById('regConfirmPassword');
+    const formContent = document.getElementById('formContent');
+    const formSuccess = document.getElementById('formSuccess');
+    const registerBtn = document.getElementById('registerBtn');
+
+    // ----- Password Strength -----
+    passwordInput.addEventListener('input', function() {
+      const val = this.value;
+      const strength1 = document.getElementById('strength1');
+      const strength2 = document.getElementById('strength2');
+      const strength3 = document.getElementById('strength3');
+      const strength4 = document.getElementById('strength4');
+      const strengthText = document.getElementById('strengthText');
+
+      // Reset all
+      [strength1, strength2, strength3, strength4].forEach(el => {
+        el.className = '';
+      });
+
+      let score = 0;
+      if (val.length >= 8) score++;
+      if (/[a-z]/.test(val) && /[A-Z]/.test(val)) score++;
+      if (/\d/.test(val)) score++;
+      if (/[!@#$%^&*(),.?":{}|<>]/.test(val)) score++;
+
+      const bars = [strength1, strength2, strength3, strength4];
+      bars.forEach((bar, index) => {
+        if (index < score) {
+          if (score <= 2) bar.className = 'weak';
+          else if (score === 3) bar.className = 'medium';
+          else bar.className = 'strong';
+        }
+      });
+
+      if (val.length === 0) {
+        strengthText.textContent = 'Enter a password';
+        strengthText.className = 'text-muted';
+      } else if (score <= 1) {
+        strengthText.textContent = 'Weak';
+        strengthText.className = 'text-danger';
+      } else if (score === 2) {
+        strengthText.textContent = 'Fair';
+        strengthText.className = 'text-warning';
+      } else if (score === 3) {
+        strengthText.textContent = 'Good';
+        strengthText.className = 'text-primary';
+      } else {
+        strengthText.textContent = 'Strong';
+        strengthText.className = 'text-success';
+      }
+    });
+
+    // ----- Confirm password validation -----
+    confirmInput.addEventListener('input', function() {
+      if (this.value && this.value !== passwordInput.value) {
+        this.classList.add('is-invalid');
+        this.classList.remove('is-valid');
+      } else if (this.value === passwordInput.value && this.value.length > 0) {
+        this.classList.remove('is-invalid');
+        this.classList.add('is-valid');
+      } else {
+        this.classList.remove('is-invalid', 'is-valid');
+      }
+    });
+
+    passwordInput.addEventListener('input', function() {
+      if (confirmInput.value && confirmInput.value !== this.value) {
+        confirmInput.classList.add('is-invalid');
+        confirmInput.classList.remove('is-valid');
+      } else if (confirmInput.value === this.value && confirmInput.value.length > 0) {
+        confirmInput.classList.remove('is-invalid');
+        confirmInput.classList.add('is-valid');
+      }
+    });
+
+    // ----- Real-time validation removal -----
+    [nameInput, emailInput, phoneInput, passwordInput, confirmInput].forEach(input => {
+      input.addEventListener('input', function() {
+        if (this.value.trim()) {
+          this.classList.remove('is-invalid');
+        }
+      });
+    });
+
+    // ----- Form submission -----
+    form.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      // Validate all fields
+      let valid = true;
+
+      // Name validation
+      if (!nameInput.value.trim()) {
+        nameInput.classList.add('is-invalid');
+        valid = false;
+      } else {
+        nameInput.classList.remove('is-invalid');
+      }
+
+      // Email validation
+      const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailInput.value.trim() || !emailPattern.test(emailInput.value.trim())) {
+        emailInput.classList.add('is-invalid');
+        valid = false;
+      } else {
+        emailInput.classList.remove('is-invalid');
+      }
+
+      // Password validation
+      if (!passwordInput.value || passwordInput.value.length < 8) {
+        passwordInput.classList.add('is-invalid');
+        valid = false;
+      } else {
+        passwordInput.classList.remove('is-invalid');
+      }
+
+      // Confirm password validation
+      if (!confirmInput.value || confirmInput.value !== passwordInput.value) {
+        confirmInput.classList.add('is-invalid');
+        valid = false;
+      } else {
+        confirmInput.classList.remove('is-invalid');
+      }
+
+      // Phone is optional
+
+      if (!valid) return;
+
+      // Simulate registration
+      const originalText = registerBtn.innerHTML;
+      registerBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Creating Account...';
+      registerBtn.disabled = true;
+
+      setTimeout(() => {
+        // Hide form, show success
+        formContent.style.display = 'none';
+        formSuccess.style.display = 'block';
+      }, 1500);
+    });
+  });
+</script>
+</body>
+</html>

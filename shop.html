@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Shop - The Lazy Llama Coffee Bar</title>
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Font Awesome 6 (free) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ========================================
+       COMPLETE CSS – THE LAZY LLAMA COFFEE BAR (Shop)
+       ======================================== */
+
+    /* ===== 1. ROOT VARIABLES ===== */
+    :root {
+      --brown: #5D4037;
+      --beige: #D7CCC8;
+      --coral: #FF8A65;
+      --white: #F5F5F5;
+      --brown-dark: #3E2723;
+      --brown-light: #795548;
+      --beige-light: #E9E2DE;
+      --beige-dark: #C8BBB5;
+      --coral-dark: #F4511E;
+      --text: #241C19;
+      --text-muted: #746B67;
+      --border: rgba(93,64,55,0.14);
+      --white-pure: #FFFFFF;
+      --font-serif: 'Playfair Display', Georgia, serif;
+      --font-sans: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      --radius-sm: 8px;
+      --radius-md: 16px;
+      --radius-lg: 28px;
+      --radius-pill: 999px;
+      --shadow-sm: 0 8px 25px rgba(62,39,35,0.07);
+      --shadow-md: 0 20px 50px rgba(62,39,35,0.12);
+      --shadow-lg: 0 35px 80px rgba(62,39,35,0.16);
+      --transition-smooth: cubic-bezier(0.22, 0.61, 0.36, 1);
+    }
+
+    /* ===== 2. RESET & BASE ===== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--white);
+      color: var(--text);
+      font-family: var(--font-sans);
+      font-size: clamp(1rem, 1.2vw, 1.15rem);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    h1, h2, h3, h4, h5, .serif { font-family: var(--font-serif); letter-spacing: -0.02em; }
+    a { text-decoration: none; color: inherit; }
+    ul, ol { list-style: none; padding: 0; }
+
+    ::selection { background: var(--coral); color: var(--white-pure); }
+    :focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+
+    /* ===== 3. BOOTSTRAP OVERRIDES ===== */
+    .btn {
+      font-family: var(--font-sans);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      border-radius: var(--radius-pill);
+      padding: 0.65rem 2rem;
+      transition: all 0.35s ease;
+      border-width: 2px;
+    }
+    .btn-primary {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .btn-primary:hover {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+      transform: translateY(-2px) scale(1.02);
+      box-shadow: var(--shadow-md);
+    }
+    .btn-secondary {
+      background: var(--coral);
+      border-color: var(--coral);
+      color: #fff;
+    }
+    .btn-secondary:hover {
+      background: var(--coral-dark);
+      border-color: var(--coral-dark);
+      transform: translateY(-2px);
+    }
+    .btn-outline-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-muted);
+    }
+    .btn-outline-secondary:hover {
+      background: var(--beige-light);
+      border-color: var(--brown);
+      color: var(--brown);
+      transform: translateY(-2px);
+    }
+    .btn-sm {
+      padding: 0.4rem 1rem;
+      font-size: 0.7rem;
+      min-height: 36px;
+    }
+
+    .bg-coral { background: var(--coral); }
+    .text-brown { color: var(--brown); }
+    .text-coral { color: var(--coral); }
+    .form-range::-webkit-slider-thumb { background: var(--brown); }
+    .form-range::-moz-range-thumb { background: var(--brown); }
+
+    /* ===== 4. SECTION BADGE ===== */
+    .section-badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      color: var(--coral);
+      margin-bottom: 0.5rem;
+      position: relative;
+    }
+    .section-badge::after {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--coral);
+      margin-left: 12px;
+      vertical-align: middle;
+    }
+    .section-header {
+      max-width: 700px;
+      margin-bottom: 3rem;
+    }
+    .section-header h2 {
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      font-weight: 700;
+    }
+    .section-header p {
+      color: var(--text-muted);
+      font-weight: 300;
+    }
+
+    /* ===== 5. NAVBAR ===== */
+    .navbar {
+      background: rgba(245,245,245,0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid var(--border);
+      padding: 0.5rem 0;
+    }
+    .navbar-brand {
+      font-family: var(--font-serif);
+      font-weight: 700;
+      font-size: 1.3rem;
+      letter-spacing: -0.02em;
+      color: var(--brown) !important;
+    }
+    .navbar-brand .nav-logo {
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-right: 6px;
+    }
+    .nav-link {
+      font-size: 0.8rem;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted) !important;
+      padding: 0.5rem 0.8rem !important;
+      position: relative;
+      transition: color 0.3s ease;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 2px;
+      left: 0.8rem;
+      width: 0;
+      height: 2px;
+      background: var(--coral);
+      transition: width 0.4s ease;
+    }
+    .nav-link:hover, .nav-link.active {
+      color: var(--brown) !important;
+    }
+    .nav-link:hover::after, .nav-link.active::after {
+      width: calc(100% - 1.6rem);
+    }
+    .navbar .nav-actions a {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      transition: color 0.3s;
+      position: relative;
+      margin-left: 6px;
+    }
+    .navbar .nav-actions a:hover { color: var(--brown); }
+    .cart-count, .wishlist-count {
+      position: absolute;
+      top: -6px;
+      right: -6px;
+      font-size: 0.6rem;
+      font-weight: 600;
+      background: var(--coral);
+      color: #fff;
+      border-radius: 50%;
+      width: 18px;
+      height: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sans);
+    }
+    .nav-cta {
+      font-size: 0.75rem !important;
+      padding: 0.4rem 1.2rem !important;
+      min-height: 38px;
+      margin-left: 10px;
+    }
+
+    /* ===== 6. PAGE HERO ===== */
+    .page-hero {
+      padding: 4rem 0;
+      background: var(--beige-light);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 4.5rem);
+      animation: fadeInUp 0.8s var(--transition-smooth);
+    }
+    .page-hero p {
+      font-size: clamp(1rem, 1.2vw, 1.2rem);
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto;
+      animation: fadeInUp 0.8s var(--transition-smooth) 0.2s both;
+    }
+    .page-hero .hero-llama {
+      font-size: 5rem;
+      color: var(--brown-light);
+      opacity: 0.06;
+      position: absolute;
+      right: 5%;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    /* ===== 7. FILTER SIDEBAR (3D) ===== */
+    .filter-sidebar {
+      padding: 1.5rem;
+      background: #fff;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border);
+      transition: transform 0.5s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.5s ease;
+      transform-style: preserve-3d;
+      perspective: 600px;
+      position: sticky;
+      top: 90px;
+    }
+    .filter-sidebar:hover {
+      transform: translateY(-4px) rotateX(1deg) rotateY(2deg);
+      box-shadow: var(--shadow-md);
+    }
+    .filter-sidebar h5 {
+      font-family: var(--font-serif);
+      font-size: 1.1rem;
+      margin-bottom: 0.75rem;
+      color: var(--brown);
+    }
+    .filter-sidebar .form-check {
+      margin-bottom: 0.3rem;
+    }
+    .filter-sidebar .form-check-input {
+      accent-color: var(--brown);
+      cursor: pointer;
+    }
+    .filter-sidebar .form-check-label {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      cursor: pointer;
+    }
+    .filter-sidebar hr {
+      margin: 1rem 0;
+      border-color: var(--border);
+    }
+    .filter-sidebar .form-range {
+      width: 100%;
+    }
+    .filter-sidebar .price-labels {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+    .filter-sidebar .btn {
+      width: 100%;
+      font-size: 0.75rem;
+      padding: 0.5rem;
+      min-height: 40px;
+    }
+    .filter-sidebar .btn + .btn {
+      margin-top: 0.5rem;
+    }
+
+    /* ===== 8. PRODUCT CARDS (3D) ===== */
+    .product-card {
+      background: #fff;
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      border: 1px solid var(--border);
+      transition: transform 0.6s cubic-bezier(.22,.61,.36,1),
+                  box-shadow 0.6s ease;
+      transform-style: preserve-3d;
+      perspective: 800px;
+      height: 100%;
+    }
+    .product-card:hover {
+      transform: translateY(-10px) rotateX(2deg) rotateY(3deg);
+      box-shadow: var(--shadow-lg);
+    }
+    .product-image {
+      aspect-ratio: 1/1;
+      background: linear-gradient(145deg, var(--beige-light), var(--beige));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.6s ease;
+    }
+    .product-card:hover .product-image {
+      transform: scale(1.04);
+    }
+    .product-image .coffee-icon {
+      filter: drop-shadow(0 8px 20px rgba(62,39,35,0.12));
+      transition: transform 0.6s ease;
+      color: var(--brown-light);
+      font-size: 3.5rem;
+    }
+    .product-card:hover .product-image .coffee-icon {
+      transform: rotate(-6deg) scale(1.1);
+    }
+    .product-wishlist {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(4px);
+      border: none;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .product-wishlist:hover {
+      background: #fff;
+      transform: scale(1.1);
+      color: var(--coral);
+    }
+    .product-wishlist.active {
+      color: var(--coral);
+    }
+    .product-category {
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--coral);
+      display: inline-block;
+      margin-bottom: 0.25rem;
+    }
+    .product-card h3 {
+      font-size: clamp(1.1rem, 1.3vw, 1.3rem);
+      font-family: var(--font-serif);
+      margin-bottom: 0.25rem;
+    }
+    .product-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+      margin-bottom: 0.25rem;
+    }
+    .product-rating .stars {
+      color: #f5b342;
+      letter-spacing: 1px;
+    }
+    .product-rating .count {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+    .product-price {
+      font-weight: 600;
+      color: var(--brown);
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+    }
+    .product-card .btn {
+      font-size: 0.7rem;
+      padding: 0.3rem 0.6rem;
+      min-height: 32px;
+    }
+
+    /* ===== 9. PAGINATION (3D) ===== */
+    .pagination {
+      gap: 0.3rem;
+    }
+    .pagination .page-item .page-link {
+      border-radius: 50%;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      background: #fff;
+    }
+    .pagination .page-item .page-link:hover {
+      background: var(--beige-light);
+      border-color: var(--brown);
+      transform: translateY(-2px) scale(1.04);
+      box-shadow: var(--shadow-sm);
+    }
+    .pagination .page-item.active .page-link {
+      background: var(--brown);
+      border-color: var(--brown);
+      color: #fff;
+    }
+    .pagination .page-item.active .page-link:hover {
+      background: var(--brown-dark);
+      border-color: var(--brown-dark);
+    }
+    .pagination .page-item:last-child .page-link {
+      width: auto;
+      border-radius: var(--radius-pill);
+      padding: 0 1.2rem;
+    }
+
+    /* ===== 10. FOOTER ===== */
+    .footer {
+      background: var(--brown-dark);
+      color: rgba(255,255,255,0.8);
+      padding: 4rem 0 2rem;
+    }
+    .footer h3 { color: #fff; font-size: 1.6rem; }
+    .footer a { opacity: 0.7; transition: opacity 0.3s, color 0.3s; }
+    .footer a:hover { opacity: 1; color: var(--coral); }
+    .footer .footer-links ul { padding: 0; list-style: none; }
+    .footer .footer-links ul li { margin-bottom: 0.5rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.08);
+      padding-top: 1.5rem;
+      font-size: 0.8rem;
+      opacity: 0.6;
+    }
+
+    /* ===== 11. ANIMATIONS ===== */
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ===== 12. RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .filter-sidebar {
+        position: static;
+        margin-bottom: 1.5rem;
+      }
+    }
+    @media (max-width: 768px) {
+      .page-hero { padding: 2.5rem 0; }
+      .page-hero .hero-llama { display: none; }
+      .filter-sidebar:hover { transform: translateY(-2px) rotateX(0) rotateY(0); }
+      .product-card:hover { transform: translateY(-6px) rotateX(0) rotateY(0); }
+      .footer .row { text-align: center; }
+    }
+    @media (max-width: 576px) {
+      .filter-sidebar { padding: 1rem; }
+      .product-image .coffee-icon { font-size: 2.8rem; }
+      .pagination .page-item .page-link { width: 36px; height: 36px; font-size: 0.85rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">
+      <i class="fas fa-otter text-brown fs-2 me-2"></i> Lazy Llama
+    </a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navLinks" aria-controls="navLinks" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navLinks">
+      <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="shop.html">Shop</a></li>
+        <li class="nav-item"><a class="nav-link" href="our-coffee.html">Our Coffee</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="locations.html">Locations</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+      </ul>
+      <div class="d-flex align-items-center gap-2">
+        <a href="#" class="text-muted"><i class="fas fa-search"></i></a>
+        <a href="account.html" class="text-muted"><i class="fas fa-user"></i></a>
+        <a href="wishlist.html" class="text-muted position-relative">
+          <i class="fas fa-heart"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">0</span>
+        </a>
+        <a href="cart.html" class="text-muted position-relative">
+          <i class="fas fa-shopping-bag"></i>
+          <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-coral" style="font-size:0.6rem;">0</span>
+        </a>
+        <a href="checkout.html" class="btn btn-primary btn-sm">Order Coffee</a>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ===== PAGE HERO ===== -->
+<section class="page-hero">
+  <div class="container">
+    <h1>Our Coffee Collection</h1>
+    <p>Discover premium specialty coffees from the world's best growing regions</p>
+    <div class="hero-llama"><i class="fas fa-otter"></i></div>
+  </div>
+</section>
+
+<!-- ===== SHOP CONTENT ===== -->
+<section class="py-5">
+  <div class="container">
+    <div class="row g-4">
+
+      <!-- Filters Sidebar -->
+      <div class="col-lg-3">
+        <div class="filter-sidebar">
+          <h5><i class="fas fa-sliders-h text-coral me-2"></i>Categories</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox" checked>
+            <label class="form-check-label">All</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Blends</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Single Origin</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Espresso</label>
+          </div>
+
+          <hr>
+
+          <h5><i class="fas fa-dollar-sign text-coral me-2"></i>Price Range</h5>
+          <input type="range" class="form-range" min="0" max="100" value="50">
+          <div class="price-labels">
+            <span>$0</span>
+            <span>$50</span>
+          </div>
+
+          <hr>
+
+          <h5><i class="fas fa-fire text-coral me-2"></i>Roast Level</h5>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Light</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Medium</label>
+          </div>
+          <div class="form-check">
+            <input class="form-check-input" type="checkbox">
+            <label class="form-check-label">Dark</label>
+          </div>
+
+          <button class="btn btn-primary mt-3"><i class="fas fa-filter me-2"></i>Apply Filters</button>
+          <button class="btn btn-outline-secondary"><i class="fas fa-undo me-2"></i>Clear All</button>
+        </div>
+      </div>
+
+      <!-- Products Grid -->
+      <div class="col-lg-9">
+        <!-- Toolbar -->
+        <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+          <span class="text-muted"><i class="fas fa-cubes me-2"></i>Showing <strong>6</strong> products</span>
+          <div class="d-flex align-items-center gap-2">
+            <label class="text-muted small me-1">Sort by:</label>
+            <select class="form-select form-select-sm w-auto" style="border-radius: var(--radius-pill); border-color: var(--border);">
+              <option>Newest</option>
+              <option>Price: Low to High</option>
+              <option>Price: High to Low</option>
+              <option>Popular</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="row g-4">
+
+          <!-- Product 1 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-mug-hot coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Blend</span>
+                <h3>Lazy Llama House Blend</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★☆</span>
+                  <span class="count">(24)</span>
+                </div>
+                <div class="product-price">$18.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 2 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-mug-saucer coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Single Origin</span>
+                <h3>Alaçatı Espresso</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★★</span>
+                  <span class="count">(18)</span>
+                </div>
+                <div class="product-price">$22.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 3 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-coffee coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Single Origin</span>
+                <h3>New York Roast</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★☆</span>
+                  <span class="count">(31)</span>
+                </div>
+                <div class="product-price">$19.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 4 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-mug-hot coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Blend</span>
+                <h3>Llama Latte Blend</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★☆</span>
+                  <span class="count">(15)</span>
+                </div>
+                <div class="product-price">$16.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 5 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-mug-saucer coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Single Origin</span>
+                <h3>Ethiopian Sunrise</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★★</span>
+                  <span class="count">(27)</span>
+                </div>
+                <div class="product-price">$24.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Product 6 -->
+          <div class="col-md-6 col-lg-4">
+            <div class="product-card">
+              <div class="product-image">
+                <i class="fas fa-coffee coffee-icon"></i>
+                <button class="product-wishlist"><i class="far fa-heart"></i></button>
+              </div>
+              <div class="p-3">
+                <span class="product-category">Single Origin</span>
+                <h3>Colombian Reserve</h3>
+                <div class="product-rating">
+                  <span class="stars">★★★★☆</span>
+                  <span class="count">(19)</span>
+                </div>
+                <div class="product-price">$21.99</div>
+                <div class="d-flex gap-2">
+                  <a href="product.html" class="btn btn-primary btn-sm flex-fill">View</a>
+                  <button class="btn btn-secondary btn-sm flex-fill">Add</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Pagination -->
+        <nav aria-label="Page navigation" class="mt-4">
+          <ul class="pagination justify-content-center">
+            <li class="page-item active"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item"><a class="page-link" href="#">Next <i class="fas fa-arrow-right ms-1"></i></a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-md-6 col-lg-3">
+        <h3>The Lazy Llama<br>Coffee Bar</h3>
+        <p class="opacity-75">Good Coffee. Lazy Moments.</p>
+        <div class="d-flex gap-3">
+          <a href="#" aria-label="Instagram"><i class="fab fa-instagram fs-4"></i></a>
+          <a href="#" aria-label="Facebook"><i class="fab fa-facebook fs-4"></i></a>
+          <a href="#" aria-label="Twitter"><i class="fab fa-twitter fs-4"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Shop</h4><ul><li><a href="shop.html">All Coffees</a></li><li><a href="shop.html">Blends</a></li><li><a href="shop.html">Single Origin</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Company</h4><ul><li><a href="about.html">About</a></li><li><a href="our-coffee.html">Our Coffee</a></li><li><a href="locations.html">Locations</a></li><li><a href="contact.html">Contact</a></li></ul></div>
+      <div class="col-6 col-md-3 col-lg-2 footer-links"><h4 class="text-white">Locations</h4><ul><li><a href="locations.html">New York</a></li><li><a href="locations.html">Alaçatı</a></li></ul></div>
+    </div>
+    <div class="footer-bottom d-flex flex-column flex-md-row justify-content-between mt-4">
+      <span>&copy; 2024 The Lazy Llama Coffee Bar. All rights reserved.</span>
+      <span>Follow us: @thelazyllamacoffeebar</span>
+    </div>
+  </div>
+</footer>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Shop interactivity -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Wishlist toggle
+    document.querySelectorAll('.product-wishlist').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.classList.toggle('active');
+        const icon = this.querySelector('i');
+        if (this.classList.contains('active')) {
+          icon.className = 'fas fa-heart';
+        } else {
+          icon.className = 'far fa-heart';
+        }
+      });
+    });
+
+    // Add to cart buttons (demo)
+    document.querySelectorAll('.btn-secondary.btn-sm.flex-fill').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const productName = this.closest('.p-3').querySelector('h3').textContent;
+        alert(`Added "${productName}" to your cart!`);
+      });
+    });
+
+    // Apply filters (demo)
+    document.querySelector('.filter-sidebar .btn-primary').addEventListener('click', function() {
+      alert('Filters applied! (Demo)');
+    });
+
+    // Clear filters (demo)
+    document.querySelector('.filter-sidebar .btn-outline-secondary').addEventListener('click', function() {
+      document.querySelectorAll('.filter-sidebar .form-check-input').forEach(cb => {
+        if (cb.hasAttribute('checked')) {
+          cb.checked = true;
+        } else {
+          cb.checked = false;
+        }
+      });
+      document.querySelector('.filter-sidebar .form-range').value = 50;
+      alert('Filters cleared! (Demo)');
+    });
+
+    // Price range display
+    const rangeInput = document.querySelector('.filter-sidebar .form-range');
+    const priceLabels = document.querySelectorAll('.filter-sidebar .price-labels span');
+    rangeInput.addEventListener('input', function() {
+      const val = this.value;
+      priceLabels[1].textContent = '$' + val;
+    });
+  });
+</script>
+</body>
+</html>
